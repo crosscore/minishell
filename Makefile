@@ -6,7 +6,7 @@
 #    By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/26 18:50:32 by ysakahar          #+#    #+#              #
-#    Updated: 2023/06/28 02:49:21 by ysakahar         ###   ########.fr        #
+#    Updated: 2023/06/28 02:58:42 by ysakahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS		= $(shell find $(SRC_DIR) -name "*.c")
 OBJS		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 #$(info $(SRCS))
 
-FLAGS		= -Wall -Werror -Wextra #-g -fsanitize=address
+FLAGS		= -Wall -Werror -Wextra -g -fsanitize=address
 LIBFT		= $(LIB_DIR)/libft.a
 HEADER		= includes/minishell.h
 

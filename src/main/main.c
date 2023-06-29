@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/28 02:53:34 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 13:27:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char **argv, char **envp)
 	tools.envp = ft_arrdup(envp);
 	find_pwd(&tools);
 	implement_tools(&tools);
-	printf("\n%s\n\n", WELCOME_MSG);
 	minishell_loop(&tools);
 	return (0);
 }

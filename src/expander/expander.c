@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/28 02:48:08 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/28 16:54:58 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ char	*expander_str(t_tools *tools, char *str)
 	char	*tmp;
 
 	tmp = NULL;
-	if (str[dollar_sign(str) - 2] != '\'' && dollar_sign(str) != 0
-		&& str[dollar_sign(str)] != '\0')
+	if (dollar_sign(str) >= 2 && str[dollar_sign(str) - 2] != '\''
+		&& dollar_sign(str) != 0 && str[dollar_sign(str)] != '\0')
 	{
 		tmp = detect_dollar_sign(tools, str);
 		free(str);

@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:15:48 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 13:27:56 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # define CYAN    		"\033[36m"
 # define WHITE   		"\033[37m"
 # define GREY    		"\033[90m"
-# define WELCOME_MSG	"\033[96mWelcome!\033[0m"
 # define HEREDOC_MSG	"\033[1;34mheredoc> \033[0m"
 # define READLINE_MSG	"\033[1;36mminishell\033[34m$ \033[0m"
 
