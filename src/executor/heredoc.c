@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: komatsud <komatsud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:17 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:15:48 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 18:21:44 by komatsud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	create_heredoc(t_lexer *heredoc, bool quotes,
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	line = readline(HEREDOC_MSG);
 	while (line && ft_strncmp(heredoc->str, line, ft_strlen(heredoc->str))
-		&& !g_global.stop_heredoc)
+		&& g_global.stop_heredoc == 0)
 	{
 		if (quotes == false)
 			line = expander_str(tools, line);
@@ -31,7 +31,7 @@ int	create_heredoc(t_lexer *heredoc, bool quotes,
 		line = readline(HEREDOC_MSG);
 	}
 	free(line);
-	if (g_global.stop_heredoc || !line)
+	if (g_global.stop_heredoc == 1 || line == NULL)
 		return (EXIT_FAILURE);
 	close(fd);
 	return (EXIT_SUCCESS);
@@ -67,7 +67,7 @@ char	*generate_heredoc_filename(void)
 	char		*file_name;
 
 	num = ft_itoa(i++);
-	file_name = ft_strjoin("build/.tmp_heredoc_file_", num);
+	file_name = ft_strjoin("tmp_heredoc_file_", num);
 	free(num);
 	return (file_name);
 }
