@@ -6,29 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:58 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 19:10:00 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 23:06:53 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	find_pwd(t_tools *tools)
-{
-	int	i;
-
-	i = 0;
-	while (tools->envp[i])
-	{
-		if (!ft_strncmp(tools->envp[i], "PWD=", 4))
-			tools->pwd = ft_substr(tools->envp[i],
-					4, ft_strlen(tools->envp[i]) - 4);
-		if (!ft_strncmp(tools->envp[i], "OLDPWD=", 7))
-			tools->old_pwd = ft_substr(tools->envp[i],
-					7, ft_strlen(tools->envp[i]) - 7);
-		i++;
-	}
-	return (1);
-}
+#include "../includes/minishell.h"
 
 char	*find_path(char **envp)
 {

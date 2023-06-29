@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: komatsud <komatsud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:17 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 18:21:44 by komatsud         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	create_heredoc(t_lexer *heredoc, bool quotes,
 	t_tools *tools, char *file_name)

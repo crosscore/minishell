@@ -6,11 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:21 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:15:48 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 t_parser_tools	init_parser_tools(t_lexer *lexer_list, t_tools *tools)
 {

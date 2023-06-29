@@ -6,11 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:30 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:15:48 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 t_simple_cmds	*call_expander(t_tools *tools, t_simple_cmds *cmd)
 {

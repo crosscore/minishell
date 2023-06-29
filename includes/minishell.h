@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 13:27:56 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 00:08:17 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ typedef struct s_simple_cmds
 }	t_simple_cmds;
 
 int				parse_envp(t_tools *tools);
-int				find_pwd(t_tools *tools);
 int				parser(t_tools *tools);
 
 //parser_utils
@@ -159,7 +158,7 @@ void			ft_lexerdelone(t_lexer **lst, int i);
 void			ft_lexerclear(t_lexer **lst);
 int				token_reader(t_tools *tools);
 int				add_node(char *str, t_ops op, t_lexer **lexer_list);
-t_ops		check_token(int c);
+t_ops			check_token(int c);
 int				handle_token(char *str, int i, t_lexer **lexer_list);
 
 /* lexer */
@@ -180,6 +179,13 @@ void			single_cmd(t_simple_cmds *cmd, t_tools *tools);
 
 // heredoc
 int				send_heredoc(t_tools *tools, t_simple_cmds *cmd);
+
+/* initialization */
+int				parse_envp(t_tools *tools);
+void			initialize_signals(void);
+int				implement_tools(t_tools *tools);
+char			**ft_arrdup(char **arr);
+void			initialization(t_tools *tools, char **envp);
 
 /* error */
 void			parser_error(int error, t_tools *tools, t_lexer *lexer_list);
@@ -202,5 +208,7 @@ int				cmd_exit(t_tools *tools, t_simple_cmds *simple_cmd);
 int				cmd_continue(t_tools *tools, t_simple_cmds *simple_cmd);
 size_t			equal_sign(char *str);
 int				check_valid_identifier(char c);
+
+/* main */
 
 #endif

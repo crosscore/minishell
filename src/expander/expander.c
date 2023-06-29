@@ -6,11 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/28 16:54:58 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	loop_if_dollar_sign(t_tools *tools, char *str, char **tmp, int j)
 {

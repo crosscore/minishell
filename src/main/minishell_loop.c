@@ -6,28 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 18:50:01 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 00:04:26 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	minishell_loop(t_tools *tools);
-
-int	implement_tools(t_tools *tools)
-{
-	tools->simple_cmds = NULL;
-	tools->lexer_list = NULL;
-	tools->reset = false;
-	tools->pid = NULL;
-	tools->heredoc = false;
-	g_global.stop_heredoc = 0;
-	g_global.in_cmd = 0;
-	g_global.in_heredoc = 0;
-	parse_envp(tools);
-	init_signals();
-	return (1);
-}
 
 int	reset_tools(t_tools *tools)
 {

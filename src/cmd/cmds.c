@@ -6,11 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:13:02 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 19:44:09 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	(*cmd_arr(char *str))(t_tools *tools, t_simple_cmds *simple_cmd)
 {

@@ -6,11 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 13:27:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 23:08:34 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -18,12 +18,10 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || argv[1])
 	{
-		printf("This program does not accept arguments\n");
+		printf("No arguments allowed.\n");
 		exit(0);
 	}
-	tools.envp = ft_arrdup(envp);
-	find_pwd(&tools);
-	implement_tools(&tools);
+	initialization(&tools, envp);
 	minishell_loop(&tools);
 	return (0);
 }

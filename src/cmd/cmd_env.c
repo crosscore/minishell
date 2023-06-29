@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	cmd_env(t_tools *tools, t_simple_cmds *simple_cmd)
 {

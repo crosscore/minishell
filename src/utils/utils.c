@@ -6,11 +6,11 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:14 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 18:59:16 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 00:04:00 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	find_matching_quote(char *line, int i, int *num_del, int del)
 {
@@ -44,29 +44,4 @@ int	count_quotes(char *line)
 	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
 		return (0);
 	return (1);
-}
-
-char	**ft_arrdup(char **arr)
-{
-	char	**rtn;
-	size_t	i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		i++;
-	rtn = ft_calloc(sizeof(char *), i + 1);
-	if (!rtn)
-		return (NULL);
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		rtn[i] = ft_strdup(arr[i]);
-		if (rtn[i] == NULL)
-		{
-			free_array(rtn);
-			return (rtn);
-		}
-		i++;
-	}
-	return (rtn);
 }
