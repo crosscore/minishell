@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:15 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 17:23:22 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 18:09:24 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	generate_cmd_nodes_and_handle_errors(t_tools *tools)
 	return (EXIT_SUCCESS);
 }
 
-// The original function would look like this:
 int	parser(t_tools *tools)
 {
 	if (initialize_tools(tools) == EXIT_FAILURE)

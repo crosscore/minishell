@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:28 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:15:48 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:55:14 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,9 @@ void	rm_redirections(t_parser_tools *parser_tools)
 	if (!tmp->next)
 		parser_error(0, parser_tools->tools, parser_tools->lexer_list);
 	if (tmp->next->op)
-		parser_double_token_error(parser_tools->tools,
+		parser_double_token_error(parser_tools->tools, \
 			parser_tools->lexer_list, tmp->next->op);
-	if ((tmp->op >= REDIRECT_OUTPUT
-			&& tmp->op <= HEREDOC))
+	if ((tmp->op >= REDIRECT_OUTPUT && tmp->op <= HEREDOC))
 		add_new_redirection(tmp, parser_tools);
 	rm_redirections(parser_tools);
 }
