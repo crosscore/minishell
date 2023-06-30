@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:05:54 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:28:43 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ typedef struct s_lexer
 
 typedef struct s_parser
 {
+	int				num_ops;
 	t_lexer			*lexer;
 	t_lexer			*redirections;
-	int				num_ops;
 	struct s_state	*state;
 }	t_parser;
 
@@ -83,22 +83,22 @@ typedef struct s_state
 	char			*args;
 	char			**paths;
 	char			**envp;
-	struct s_cmd	*cmd;
-	t_lexer			*lexer;
 	char			*pwd;
 	char			*old_pwd;
 	int				pipes;
 	int				*pid;
 	bool			heredoc;
 	bool			reset;
+	t_lexer			*lexer;
+	struct s_cmd	*cmd;
 }	t_state;
 
 typedef struct s_cmd
 {
 	char			**str;
-	int				(*builtin)(t_state *, struct s_cmd *);
 	int				num_ops;
 	char			*hd_file_name;
+	int				(*builtin)(t_state *, struct s_cmd *);
 	t_lexer			*redirections;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
