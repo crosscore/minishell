@@ -6,21 +6,21 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:12:02 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:36:24 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	change_path(t_tools *tools)
+void	change_path(t_state *state)
 {
 	char	*tmp;
 
-	tmp = ft_strdup(tools->pwd);
-	free(tools->old_pwd);
-	tools->old_pwd = tmp;
-	free(tools->pwd);
-	tools->pwd = getcwd(NULL, sizeof(NULL));
+	tmp = ft_strdup(state->pwd);
+	free(state->old_pwd);
+	state->old_pwd = tmp;
+	free(state->pwd);
+	state->pwd = getcwd(NULL, sizeof(NULL));
 }
 
 size_t	equal_sign(char *str)

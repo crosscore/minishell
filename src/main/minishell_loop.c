@@ -6,66 +6,64 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 01:03:50 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:32:15 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	minishell_loop(t_tools *tools);
-
-int	reset_tools(t_tools *tools)
+int	reset_tools(t_state *state)
 {
-	ft_simple_cmdsclear(&tools->simple_cmds);
-	free(tools->args);
-	if (tools->pid)
-		free(tools->pid);
-	free_array(tools->paths);
-	implement_tools(tools);
-	tools->reset = true;
-	minishell_loop(tools);
+	ft_simple_cmdsclear(&state->simple_cmds);
+	free(state->args);
+	if (state->pid)
+		free(state->pid);
+	free_array(state->paths);
+	implement_tools(state);
+	state->reset = true;
+	minishell_loop(state);
 	return (1);
 }
 
-int	prepare_executor(t_tools *tools)
+int	prepare_executor(t_state *state)
 {
 	signal(SIGQUIT, sigquit_handler);
 	g_global.in_cmd = 1;
-	if (tools->pipes == 0)
-		single_cmd(tools->simple_cmds, tools);
+	if (state->pipes == 0)
+		single_cmd(state->simple_cmds, state);
 	else
 	{
-		tools->pid = ft_calloc(sizeof(int), tools->pipes + 2);
-		if (!tools->pid)
-			return (ft_error(1, tools));
-		executor(tools);
+		state->pid = ft_calloc(sizeof(int), state->pipes + 2);
+		if (!state->pid)
+			return (ft_error(1, state));
+		executor(state);
 	}
 	g_global.in_cmd = 0;
 	return (EXIT_SUCCESS);
 }
 
-int	minishell_loop(t_tools *tools)
+int	minishell_loop(t_state *state)
 {
 	char	*tmp;
 
-	tools->args = readline(READLINE_MSG);
-	tmp = ft_strtrim(tools->args, " ");
-	free(tools->args);
-	tools->args = tmp;
-	if (!tools->args)
+	state->args = readline(READLINE_MSG);
+	tmp = ft_strtrim(state->args, " ");
+	free(state->args);
+	state->args = tmp;
+	if (!state->args)
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
-	if (tools->args[0] == '\0')
-		return (reset_tools(tools));
-	add_history(tools->args);
-	if (!count_quotes(tools->args))
-		return (ft_error(2, tools));
-	if (!token_reader(tools))
-		return (ft_error(1, tools));
-	ft_parser(tools);
-	prepare_executor(tools);
-	reset_tools(tools);
+	if (state->args[0] == '\0')
+		return (reset_tools(state));
+	add_history(state->args);
+	if (!count_quotes(state->args))
+		return (ft_error(2, state));
+	if (!token_reader(state))
+		return (ft_error(1, state));
+	ft_parser(state);
+	prepare_executor(state);
+	reset_tools(state);
 	return (1);
 }

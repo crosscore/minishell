@@ -6,14 +6,14 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:17 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:38:41 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int	create_heredoc(t_lexer *heredoc, bool quotes,
-	t_tools *tools, char *file_name)
+	t_state *state, char *file_name)
 {
 	int		fd;
 	char	*line;
@@ -24,7 +24,7 @@ int	create_heredoc(t_lexer *heredoc, bool quotes,
 		&& g_global.stop_heredoc == 0)
 	{
 		if (quotes == false)
-			line = expander_str(tools, line);
+			line = expander_str(state, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
@@ -37,7 +37,7 @@ int	create_heredoc(t_lexer *heredoc, bool quotes,
 	return (EXIT_SUCCESS);
 }
 
-int	ft_heredoc(t_tools *tools, t_lexer *heredoc, char *file_name)
+int	ft_heredoc(t_state *state, t_lexer *heredoc, char *file_name)
 {
 	bool	quotes;
 	int		sl;
@@ -54,9 +54,9 @@ int	ft_heredoc(t_tools *tools, t_lexer *heredoc, char *file_name)
 	delete_quotes(heredoc->str, '\'');
 	g_global.stop_heredoc = 0;
 	g_global.in_heredoc = 1;
-	sl = create_heredoc(heredoc, quotes, tools, file_name);
+	sl = create_heredoc(heredoc, quotes, state, file_name);
 	g_global.in_heredoc = 0;
-	tools->heredoc = true;
+	state->heredoc = true;
 	return (sl);
 }
 
@@ -72,7 +72,7 @@ char	*generate_heredoc_filename(void)
 	return (file_name);
 }
 
-int	send_heredoc(t_tools *tools, t_simple_cmds *cmd)
+int	send_heredoc(t_state *state, t_simple_cmds *cmd)
 {
 	t_lexer	*start;
 	int		sl;
@@ -86,11 +86,11 @@ int	send_heredoc(t_tools *tools, t_simple_cmds *cmd)
 			if (cmd->hd_file_name)
 				free(cmd->hd_file_name);
 			cmd->hd_file_name = generate_heredoc_filename();
-			sl = ft_heredoc(tools, cmd->redirections, cmd->hd_file_name);
+			sl = ft_heredoc(state, cmd->redirections, cmd->hd_file_name);
 			if (sl)
 			{
 				g_global.error_num = 1;
-				return (reset_tools(tools));
+				return (reset_tools(state));
 			}
 		}
 		cmd->redirections = cmd->redirections->next;

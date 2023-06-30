@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 23:08:34 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:40:25 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_tools	tools;
+	t_state	state;
 
 	if (argc != 1 || argv[1])
 	{
 		printf("No arguments allowed.\n");
 		exit(0);
 	}
-	initialization(&tools, envp);
-	minishell_loop(&tools);
+	initialization(&state, envp);
+	minishell_loop(&state);
 	return (0);
 }
 

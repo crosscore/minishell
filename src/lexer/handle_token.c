@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:39 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,26 @@ t_ops	check_token(int c)
 	return (0);
 }
 
-int	handle_token(char *str, int i, t_lexer **lexer_list)
+int	handle_token(char *str, int i, t_lexer **lexer)
 {
 	t_ops	op;
 
 	op = check_token(str[i]);
 	if (op == REDIRECT_OUTPUT && check_token(str[i + 1]) == REDIRECT_OUTPUT)
 	{
-		if (!add_node(NULL, APPEND_OUTPUT, lexer_list))
+		if (!add_node(NULL, APPEND_OUTPUT, lexer))
 			return (-1);
 		return (2);
 	}
 	else if (op == REDIRECT_INPUT && check_token(str[i + 1]) == REDIRECT_INPUT)
 	{
-		if (!add_node(NULL, HEREDOC, lexer_list))
+		if (!add_node(NULL, HEREDOC, lexer))
 			return (-1);
 		return (2);
 	}
 	else if (op)
 	{
-		if (!add_node(NULL, op, lexer_list))
+		if (!add_node(NULL, op, lexer))
 			return (-1);
 		return (1);
 	}

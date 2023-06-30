@@ -6,19 +6,19 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:55 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parser_error(int error, t_tools *tools, t_lexer *lexer_list)
+void	parser_error(int error, t_state *state, t_lexer *lexer)
 {
-	ft_lexerclear(&lexer_list);
-	ft_error(error, tools);
+	ft_lexerclear(&lexer);
+	ft_error(error, state);
 }
 
-int	parser_double_token_error(t_tools *tools, t_lexer *lexer_list,
+int	parser_double_token_error(t_state *state, t_lexer *lexer,
 	t_ops op)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
@@ -35,8 +35,8 @@ int	parser_double_token_error(t_tools *tools, t_lexer *lexer_list,
 		ft_putstr_fd("'|'\n", STDERR_FILENO);
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
-	ft_lexerclear(&lexer_list);
-	reset_tools(tools);
+	ft_lexerclear(&lexer);
+	reset_tools(state);
 	return (EXIT_FAILURE);
 }
 
@@ -53,10 +53,10 @@ int	export_error(char *c)
 	return (EXIT_FAILURE);
 }
 
-void	lexer_error(int error, t_tools *tools)
+void	lexer_error(int error, t_state *state)
 {
-	ft_lexerclear(&tools->lexer_list);
-	ft_error(error, tools);
+	ft_lexerclear(&state->lexer);
+	ft_error(error, state);
 }
 
 int	cmd_not_found(char *str)

@@ -12,27 +12,27 @@
 
 #include "../includes/minishell.h"
 
-char	*find_path_ret(char *str, t_tools *tools)
+char	*find_path_ret(char *str, t_state *state)
 {
 	int	i;
 
 	i = 0;
-	while (tools->envp[i])
+	while (state->envp[i])
 	{
-		if (!ft_strncmp(tools->envp[i], str, ft_strlen(str)))
-			return (ft_substr(tools->envp[i], ft_strlen(str),
-					ft_strlen(tools->envp[i]) - ft_strlen(str)));
+		if (!ft_strncmp(state->envp[i], str, ft_strlen(str)))
+			return (ft_substr(state->envp[i], ft_strlen(str),
+					ft_strlen(state->envp[i]) - ft_strlen(str)));
 		i++;
 	}
 	return (NULL);
 }
 
-int	specific_path(t_tools *tools, char *str)
+int	specific_path(t_state *state, char *str)
 {
 	char	*tmp;
 	int		ret;
 
-	tmp = find_path_ret(str, tools);
+	tmp = find_path_ret(str, state);
 	ret = chdir(tmp);
 	free(tmp);
 	if (ret != 0)
@@ -45,38 +45,38 @@ int	specific_path(t_tools *tools, char *str)
 	return (ret);
 }
 
-void	add_path_to_env(t_tools *tools)
+void	add_path_to_env(t_state *state)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	while (tools->envp[i])
+	while (state->envp[i])
 	{
-		if (!ft_strncmp(tools->envp[i], "PWD=", 4))
+		if (!ft_strncmp(state->envp[i], "PWD=", 4))
 		{
-			tmp = ft_strjoin("PWD=", tools->pwd);
-			free(tools->envp[i]);
-			tools->envp[i] = tmp;
+			tmp = ft_strjoin("PWD=", state->pwd);
+			free(state->envp[i]);
+			state->envp[i] = tmp;
 		}
-		else if (!ft_strncmp(tools->envp[i], "OLDPWD=", 7) && tools->old_pwd)
+		else if (!ft_strncmp(state->envp[i], "OLDPWD=", 7) && state->old_pwd)
 		{
-			tmp = ft_strjoin("OLDPWD=", tools->old_pwd);
-			free(tools->envp[i]);
-			tools->envp[i] = tmp;
+			tmp = ft_strjoin("OLDPWD=", state->old_pwd);
+			free(state->envp[i]);
+			state->envp[i] = tmp;
 		}
 		i++;
 	}
 }
 
-int	cmd_cd(t_tools *tools, t_simple_cmds *simple_cmd)
+int	cmd_cd(t_state *state, t_simple_cmds *simple_cmd)
 {
 	int		ret;
 
 	if (!simple_cmd->str[1])
-		ret = specific_path(tools, "HOME=");
+		ret = specific_path(state, "HOME=");
 	else if (ft_strncmp(simple_cmd->str[1], "-", 1) == 0)
-		ret = specific_path(tools, "OLDPWD=");
+		ret = specific_path(state, "OLDPWD=");
 	else
 	{
 		ret = chdir(simple_cmd->str[1]);
@@ -89,7 +89,7 @@ int	cmd_cd(t_tools *tools, t_simple_cmds *simple_cmd)
 	}
 	if (ret != 0)
 		return (EXIT_FAILURE);
-	change_path(tools);
-	add_path_to_env(tools);
+	change_path(state);
+	add_path_to_env(state);
 	return (EXIT_SUCCESS);
 }

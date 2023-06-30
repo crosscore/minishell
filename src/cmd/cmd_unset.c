@@ -82,7 +82,7 @@ int	unset_error(t_simple_cmds *simple_cmd)
 	return (EXIT_SUCCESS);
 }
 
-int	cmd_unset(t_tools *tools, t_simple_cmds *simple_cmd)
+int	cmd_unset(t_state *state, t_simple_cmds *simple_cmd)
 {
 	char	**tmp;
 
@@ -90,9 +90,9 @@ int	cmd_unset(t_tools *tools, t_simple_cmds *simple_cmd)
 		return (EXIT_FAILURE);
 	else
 	{
-		tmp = del_var(tools->envp, simple_cmd->str[1]);
-		free_array(tools->envp);
-		tools->envp = tmp;
+		tmp = del_var(state->envp, simple_cmd->str[1]);
+		free_array(state->envp);
+		state->envp = tmp;
 	}
 	return (EXIT_SUCCESS);
 }

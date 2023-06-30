@@ -6,23 +6,23 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:30 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:37:51 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_simple_cmds	*call_expander(t_tools *tools, t_simple_cmds *cmd)
+t_simple_cmds	*call_expander(t_state *state, t_simple_cmds *cmd)
 {
 	t_lexer	*start;
 
-	cmd->str = expander(tools, cmd->str);
+	cmd->str = expander(state, cmd->str);
 	start = cmd->redirections;
 	while (cmd->redirections)
 	{
 		if (cmd->redirections->op != HEREDOC)
 			cmd->redirections->str
-				= expander_str(tools, cmd->redirections->str);
+				= expander_str(state, cmd->redirections->str);
 		cmd->redirections = cmd->redirections->next;
 	}
 	cmd->redirections = start;
@@ -46,29 +46,29 @@ int	pipe_wait(int *pid, int amount)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_fork(t_tools *tools, int end[2], int fd_in, t_simple_cmds *cmd)
+int	ft_fork(t_state *state, int end[2], int fd_in, t_simple_cmds *cmd)
 {
 	static int	i = 0;
 
-	if (tools->reset == true)
+	if (state->reset == true)
 	{
 		i = 0;
-		tools->reset = false;
+		state->reset = false;
 	}
-	tools->pid[i] = fork();
-	if (tools->pid[i] < 0)
-		ft_error(5, tools);
-	if (tools->pid[i] == 0)
-		dup_cmd(cmd, tools, end, fd_in);
+	state->pid[i] = fork();
+	if (state->pid[i] < 0)
+		ft_error(5, state);
+	if (state->pid[i] == 0)
+		dup_cmd(cmd, state, end, fd_in);
 	i++;
 	return (EXIT_SUCCESS);
 }
 
-int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
+int	check_fd_heredoc(t_state *state, int end[2], t_simple_cmds *cmd)
 {
 	int	fd_in;
 
-	if (tools->heredoc)
+	if (state->heredoc)
 	{
 		close(end[0]);
 		fd_in = open(cmd->hd_file_name, O_RDONLY);
@@ -78,29 +78,29 @@ int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
 	return (fd_in);
 }
 
-int	executor(t_tools *tools)
+int	executor(t_state *state)
 {
 	int		end[2];
 	int		fd_in;
 
 	fd_in = STDIN_FILENO;
-	while (tools->simple_cmds)
+	while (state->simple_cmds)
 	{
-		tools->simple_cmds = call_expander(tools, tools->simple_cmds);
-		if (tools->simple_cmds->next)
+		state->simple_cmds = call_expander(state, state->simple_cmds);
+		if (state->simple_cmds->next)
 			pipe(end);
-		send_heredoc(tools, tools->simple_cmds);
-		ft_fork(tools, end, fd_in, tools->simple_cmds);
+		send_heredoc(state, state->simple_cmds);
+		ft_fork(state, end, fd_in, state->simple_cmds);
 		close(end[1]);
-		if (tools->simple_cmds->prev)
+		if (state->simple_cmds->prev)
 			close(fd_in);
-		fd_in = check_fd_heredoc(tools, end, tools->simple_cmds);
-		if (tools->simple_cmds->next)
-			tools->simple_cmds = tools->simple_cmds->next;
+		fd_in = check_fd_heredoc(state, end, state->simple_cmds);
+		if (state->simple_cmds->next)
+			state->simple_cmds = state->simple_cmds->next;
 		else
 			break ;
 	}
-	pipe_wait(tools->pid, tools->pipes);
-	tools->simple_cmds = ft_simple_cmdsfirst(tools->simple_cmds);
+	pipe_wait(state->pid, state->pipes);
+	state->simple_cmds = ft_simple_cmdsfirst(state->simple_cmds);
 	return (0);
 }

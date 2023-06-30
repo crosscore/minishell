@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:58 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 23:06:53 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:39:49 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ char	*find_path(char **envp)
 	return (ft_strdup("\0"));
 }
 
-int	parse_envp(t_tools *tools)
+int	parse_envp(t_state *state)
 {
 	char	*path_from_envp;
 	int		i;
 	char	*tmp;
 
-	path_from_envp = find_path(tools->envp);
-	tools->paths = ft_split(path_from_envp, ':');
+	path_from_envp = find_path(state->envp);
+	state->paths = ft_split(path_from_envp, ':');
 	free(path_from_envp);
 	i = 0;
-	while (tools->paths[i])
+	while (state->paths[i])
 	{
-		if (ft_strncmp(&tools->paths[i][ft_strlen(tools->paths[i]) - 1],
+		if (ft_strncmp(&state->paths[i][ft_strlen(state->paths[i]) - 1],
 			"/", 1) != 0)
 		{
-			tmp = ft_strjoin(tools->paths[i], "/");
-			free(tools->paths[i]);
-			tools->paths[i] = tmp;
+			tmp = ft_strjoin(state->paths[i], "/");
+			free(state->paths[i]);
+			state->paths[i] = tmp;
 		}
 		i++;
 	}

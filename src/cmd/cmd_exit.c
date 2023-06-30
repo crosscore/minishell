@@ -12,16 +12,16 @@
 
 #include "../includes/minishell.h"
 
-void	free_tools(t_tools *tools)
+void	free_tools(t_state *state)
 {
-	free_array(tools->paths);
-	free_array(tools->envp);
-	free(tools->args);
-	ft_simple_cmdsclear(&tools->simple_cmds);
-	free(tools->pwd);
-	free(tools->old_pwd);
-	if (tools->pipes)
-		free(tools->pid);
+	free_array(state->paths);
+	free_array(state->envp);
+	free(state->args);
+	ft_simple_cmdsclear(&state->simple_cmds);
+	free(state->pwd);
+	free(state->old_pwd);
+	if (state->pipes)
+		free(state->pid);
 }
 
 int	is_str_digit(char *str)
@@ -57,7 +57,7 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
-int	cmd_exit(t_tools *tools, t_simple_cmds *simple_cmd)
+int	cmd_exit(t_state *state, t_simple_cmds *simple_cmd)
 {
 	char	**str;
 
@@ -68,7 +68,7 @@ int	cmd_exit(t_tools *tools, t_simple_cmds *simple_cmd)
 		return (EXIT_FAILURE);
 	}
 	str = ft_arrdup(simple_cmd->str);
-	free_tools(tools);
+	free_tools(state);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);
 }

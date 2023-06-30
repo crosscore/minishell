@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:43 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:41:24 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_lexer	*ft_lexernew(char *str, int token)
 	t_lexer		*new_element;
 	static int	i = 0;
 
-	new_element = (t_lexer *)malloc(sizeof(t_lexer));
+	new_element = malloc(sizeof(t_lexer));
 	if (!new_element)
 		return (0);
 	new_element->str = str;

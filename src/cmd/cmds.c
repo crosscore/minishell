@@ -6,13 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:13:02 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:36:33 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	(*cmd_arr(char *str))(t_tools *tools, t_simple_cmds *simple_cmd)
+int	(*cmd_arr(char *str))(t_state *state, t_simple_cmds *simple_cmd)
 {
 	static void	*builtins[7][2] = {
 	{"echo", cmd_echo},

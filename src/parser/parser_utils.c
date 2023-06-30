@@ -6,44 +6,44 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:21 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_parser_tools	init_parser_tools(t_lexer *lexer_list, t_tools *tools)
+t_parser	init_parser(t_lexer *lexer, t_state *state)
 {
-	t_parser_tools	parser_tools;
+	t_parser	parser;
 
-	parser_tools.lexer_list = lexer_list;
-	parser_tools.redirections = NULL;
-	parser_tools.num_redirections = 0;
-	parser_tools.tools = tools;
-	return (parser_tools);
+	parser.lexer = lexer;
+	parser.redirections = NULL;
+	parser.num_redirections = 0;
+	parser.state = state;
+	return (parser);
 }
 
-void	count_pipes(t_lexer *lexer_list, t_tools *tools)
+void	count_pipes(t_lexer *lexer, t_state *state)
 {
 	t_lexer	*tmp;
 
-	tmp = lexer_list;
-	tools->pipes = 0;
+	tmp = lexer;
+	state->pipes = 0;
 	while (tmp)
 	{
 		if (tmp->op == PIPELINE)
-			tools->pipes++;
+			state->pipes++;
 		tmp = tmp->next;
 	}
 }
 
-int	count_args(t_lexer *lexer_list)
+int	count_args(t_lexer *lexer)
 {
 	t_lexer	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = lexer_list;
+	tmp = lexer;
 	while (tmp && tmp->op != PIPELINE)
 	{
 		if (tmp->i >= 0)

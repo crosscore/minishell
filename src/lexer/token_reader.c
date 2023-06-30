@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ int	skip_spaces(char *str, int i)
 	return (j);
 }
 
-int	add_node(char *str, t_ops op, t_lexer **lexer_list)
+int	add_node(char *str, t_ops op, t_lexer **lexer)
 {
 	t_lexer	*node;
 
 	node = ft_lexernew(str, op);
 	if (!node)
 		return (0);
-	ft_lexeradd_back(lexer_list, node);
+	ft_lexeradd_back(lexer, node);
 	return (1);
 }
 
-int	read_words(int i, char *str, t_lexer **lexer_list)
+int	read_words(int i, char *str, t_lexer **lexer)
 {
 	int	j;
 
@@ -52,25 +52,25 @@ int	read_words(int i, char *str, t_lexer **lexer_list)
 		else
 			j++;
 	}
-	if (!add_node(ft_substr(str, i, j), 0, lexer_list))
+	if (!add_node(ft_substr(str, i, j), 0, lexer))
 		return (-1);
 	return (j);
 }
 
-int	token_reader(t_tools *tools)
+int	token_reader(t_state *state)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while (tools->args[i])
+	while (state->args[i])
 	{
 		j = 0;
-		i += skip_spaces(tools->args, i);
-		if (check_token(tools->args[i]))
-			j = handle_token(tools->args, i, &tools->lexer_list);
+		i += skip_spaces(state->args, i);
+		if (check_token(state->args[i]))
+			j = handle_token(state->args, i, &state->lexer);
 		else
-			j = read_words(i, tools->args, &tools->lexer_list);
+			j = read_words(i, state->args, &state->lexer);
 		if (j < 0)
 			return (0);
 		i += j;

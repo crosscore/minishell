@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:02:46 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 00:08:09 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +37,42 @@ char	**ft_arrdup(char **arr)
 	return (rtn);
 }
 
-int	implement_tools(t_tools *tools)
+int	implement_tools(t_state *state)
 {
-	tools->simple_cmds = NULL;
-	tools->lexer_list = NULL;
-	tools->reset = false;
-	tools->pid = NULL;
-	tools->heredoc = false;
+	state->simple_cmds = NULL;
+	state->lexer = NULL;
+	state->reset = false;
+	state->pid = NULL;
+	state->heredoc = false;
 	g_global.stop_heredoc = 0;
 	g_global.in_cmd = 0;
 	g_global.in_heredoc = 0;
-	parse_envp(tools);
+	parse_envp(state);
 	init_signals();
 	return (1);
 }
 
-static int	find_pwd(t_tools *tools)
+static int	find_pwd(t_state *state)
 {
 	int	i;
 
 	i = 0;
-	while (tools->envp[i])
+	while (state->envp[i])
 	{
-		if (!ft_strncmp(tools->envp[i], "PWD=", 4))
-			tools->pwd = ft_substr(tools->envp[i],
-					4, ft_strlen(tools->envp[i]) - 4);
-		if (!ft_strncmp(tools->envp[i], "OLDPWD=", 7))
-			tools->old_pwd = ft_substr(tools->envp[i],
-					7, ft_strlen(tools->envp[i]) - 7);
+		if (!ft_strncmp(state->envp[i], "PWD=", 4))
+			state->pwd = ft_substr(state->envp[i],
+					4, ft_strlen(state->envp[i]) - 4);
+		if (!ft_strncmp(state->envp[i], "OLDPWD=", 7))
+			state->old_pwd = ft_substr(state->envp[i],
+					7, ft_strlen(state->envp[i]) - 7);
 		i++;
 	}
 	return (1);
 }
 
-void	initialization(t_tools *tools, char **envp)
+void	initialization(t_state *state, char **envp)
 {
-	tools->envp = ft_arrdup(envp);
-	find_pwd(tools);
-	implement_tools(tools);
+	state->envp = ft_arrdup(envp);
+	find_pwd(state);
+	implement_tools(state);
 }

@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:50 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:08:35 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 0 = If there is no string following a redirection or a pipe.
  * @param tools
  */
-int	ft_error(int error, t_tools *tools)
+int	ft_error(int error, t_state *tools)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error == 0)

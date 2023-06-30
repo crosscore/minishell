@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:41:40 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_simple_cmds	*ft_simple_cmdsnew(char **str,
 {
 	t_simple_cmds	*new_element;
 
-	new_element = (t_simple_cmds *)malloc(sizeof(t_simple_cmds));
+	new_element = malloc(sizeof(t_simple_cmds));
 	if (!new_element)
 		return (0);
 	new_element->str = str;
