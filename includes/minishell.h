@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 22:01:26 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 22:05:01 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				parse_envp(t_state *state);
 int				ft_parser(t_state *state);
 
 //parser_utils
-t_parser		init_parser(t_lexer *lexer, t_state *state);
+t_parser		initialize_parser(t_lexer *lexer, t_state *state);
 void			count_pipes(t_lexer *lexer, t_state *state);
 int				count_args(t_lexer *lexer);
 t_lexer			*find_next_cmd(t_lexer *lexer_lst);

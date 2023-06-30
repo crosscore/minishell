@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 15:25:23 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 22:05:01 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	generate_cmd_nodes_and_handle_errors(t_state *state)
 			parser_error(0, state, state->lexer);
 			return (EXIT_FAILURE);
 		}
-		parser = init_parser(state->lexer, state);
+		parser = initialize_parser(state->lexer, state);
 		node = initialize_cmd(&parser);
 		if (!node)
 		{
