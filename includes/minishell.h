@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 00:08:17 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 01:03:50 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_simple_cmds
 }	t_simple_cmds;
 
 int				parse_envp(t_tools *tools);
-int				parser(t_tools *tools);
+int				ft_parser(t_tools *tools);
 
 //parser_utils
 t_parser_tools	init_parser_tools(t_lexer *lexer_list, t_tools *tools);

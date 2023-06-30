@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -99,7 +99,7 @@ int	generate_cmd_nodes_and_handle_errors(t_tools *tools)
 	return (EXIT_SUCCESS);
 }
 
-int	parser(t_tools *tools)
+int	ft_parser(t_tools *tools)
 {
 	if (initialize_tools(tools) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

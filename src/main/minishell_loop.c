@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 00:04:26 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 01:03:50 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ int	minishell_loop(t_tools *tools)
 	add_history(tools->args);
 	if (!count_quotes(tools->args))
 		return (ft_error(2, tools));
-	//printf("ft_lexer start\n");
 	if (!token_reader(tools))
 		return (ft_error(1, tools));
-	//printf("ft_parser start\n");
-	parser(tools);
-	//printf("excutor start\n");
+	ft_parser(tools);
 	prepare_executor(tools);
 	reset_tools(tools);
 	return (1);
