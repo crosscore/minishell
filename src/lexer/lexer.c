@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 18:59:14 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 00:04:00 by ysakahar         ###   ########.fr       */
+/*   Created: 2023/06/30 18:55:33 by ysakahar          #+#    #+#             */
+/*   Updated: 2023/06/30 18:58:48 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	find_matching_quote(char *line, int i, int *num_del, int del)
+static int	find_matching_quote(char *line, int i, int *num_del, int del)
 {
 	int	j;
 
@@ -25,7 +25,7 @@ int	find_matching_quote(char *line, int i, int *num_del, int del)
 	return (j - i);
 }
 
-int	count_quotes(char *line)
+static int	count_quotes(char *line)
 {
 	int	i;
 	int	s;
@@ -43,5 +43,14 @@ int	count_quotes(char *line)
 	}
 	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
 		return (0);
+	return (1);
+}
+
+int	ft_lexer(t_state *state)
+{
+	if (!count_quotes(state->args))
+		return (ft_error(2, state));
+	if (!token_reader(state))
+		return (ft_error(1, state));
 	return (1);
 }

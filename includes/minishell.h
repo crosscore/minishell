@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 18:24:57 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 19:00:15 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ int				question_mark(char **tmp);
 int				(*cmd_arr(char *str))(t_state *state, t_cmd *cmd);
 
 // utils
-int				count_quotes(char *line);
 int				implement_tools(t_state *state);
 char			**ft_arrdup(char **arr);
 int				minishell_loop(t_state *state);
@@ -161,6 +160,7 @@ t_ops			check_op(int c);
 int				handle_op(char *str, int i, t_lexer **lexer);
 
 /* lexer */
+int				ft_lexer(t_state *state);
 int				handle_quotes(int i, char *str, char del);
 
 /* executor */
