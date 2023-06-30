@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 01:49:29 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:05:54 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ int			(*cmd_arr(char *str))(t_state *state, t_cmd *cmd);
 
 // utils
 int			implement_tools(t_state *state);
-char		**ft_arrdup(char **arr);
 
 //t_simple_cmds_utils
 t_cmd		*ft_cmd_new(char **str, int num_ops, t_lexer *redirections);
@@ -183,7 +182,7 @@ int			send_heredoc(t_state *state, t_cmd *cmd);
 int			parse_envp(t_state *state);
 void		initialize_signals(void);
 int			implement_tools(t_state *state);
-char		**ft_arrdup(char **arr);
+char		**ft_arrdup(char **source_arr);
 void		initialization(t_state *state, char **envp);
 
 /* error */

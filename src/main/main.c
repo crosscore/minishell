@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 23:15:14 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 01:51:57 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,6 @@ static int	read_and_trim_input_addhistory(t_state *state)
 	return (1);
 }
 
-int	minishell_loop(t_state *state)
-{
-	if (!read_and_trim_input_addhistory(state))
-		return (0);
-	if (!ft_lexer(state))
-		return (0);
-	ft_parser(state);
-	prepare_executor(state);
-	reset_tools(state);
-	return (1);
-}
-
 int	reset_tools(t_state *state)
 {
 	ft_cmd_clear(&state->cmd);
@@ -70,6 +58,18 @@ int	reset_tools(t_state *state)
 	implement_tools(state);
 	state->reset = true;
 	minishell_loop(state);
+	return (1);
+}
+
+int	minishell_loop(t_state *state)
+{
+	if (!read_and_trim_input_addhistory(state))
+		return (0);
+	if (!ft_lexer(state))
+		return (0);
+	ft_parser(state);
+	prepare_executor(state);
+	reset_tools(state);
 	return (1);
 }
 

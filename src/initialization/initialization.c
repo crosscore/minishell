@@ -6,35 +6,35 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:02:46 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:59:08 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:05:25 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**ft_arrdup(char **arr)
+char	**ft_arrdup(char **source_arr)
 {
-	char	**rtn;
+	char	**copied_arr;
 	size_t	i;
 
 	i = 0;
-	while (arr[i] != NULL)
+	while (source_arr[i] != NULL)
 		i++;
-	rtn = ft_calloc(sizeof(char *), i + 1);
-	if (!rtn)
+	copied_arr = ft_calloc(sizeof(char *), i + 1);
+	if (!copied_arr)
 		return (NULL);
 	i = 0;
-	while (arr[i] != NULL)
+	while (source_arr[i] != NULL)
 	{
-		rtn[i] = ft_strdup(arr[i]);
-		if (rtn[i] == NULL)
+		copied_arr[i] = ft_strdup(source_arr[i]);
+		if (copied_arr[i] == NULL)
 		{
-			free_array(rtn);
-			return (rtn);
+			free_array(copied_arr);
+			return (copied_arr);
 		}
 		i++;
 	}
-	return (rtn);
+	return (copied_arr);
 }
 
 int	implement_tools(t_state *state)
