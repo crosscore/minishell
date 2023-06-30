@@ -6,14 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 15:17:15 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:27:32 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_cmd	*ft_cmd_new(char **str,
-	int num_ops, t_lexer *redirections)
+t_cmd	*ft_cmd_new(char **str, int num_ops, t_lexer *redirections)
 {
 	t_cmd	*new_element;
 

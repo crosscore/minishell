@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 15:17:15 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:25:23 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ t_cmd	*initialize_cmd(t_parser *parser)
 		}
 		arg_size--;
 	}
-	return (ft_cmd_new(str,
-			parser->num_ops, parser->redirections));
+	return (ft_cmd_new(str, parser->num_ops, parser->redirections));
 }
 
 int	handle_pipe_errors(t_state *tools, t_ops op)

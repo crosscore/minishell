@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:28 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 15:17:15 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:25:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void	rm_redirections(t_parser *parser)
 	if (!tmp->next)
 		parser_error(0, parser->state, parser->lexer);
 	if (tmp->next->op)
-		parser_double_token_error(parser->state, \
-			parser->lexer, tmp->next->op);
+		parser_double_token_error(parser->state, parser->lexer, tmp->next->op);
 	if ((tmp->op >= REDIRECT_OUTPUT && tmp->op <= HEREDOC))
 		add_new_redirection(tmp, parser);
 	rm_redirections(parser);
