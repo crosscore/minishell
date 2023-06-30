@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:24:57 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	read_words(int i, char *str, t_lexer **lexer)
 	int	j;
 
 	j = 0;
-	while (str[i + j] && !(check_token(str[i + j])))
+	while (str[i + j] && !(check_op(str[i + j])))
 	{
 		j += handle_quotes(i + j, str, 34);
 		j += handle_quotes(i + j, str, 39);
@@ -67,8 +67,8 @@ int	token_reader(t_state *state)
 	{
 		j = 0;
 		i += skip_spaces(state->args, i);
-		if (check_token(state->args[i]))
-			j = handle_token(state->args, i, &state->lexer);
+		if (check_op(state->args[i]))
+			j = handle_op(state->args, i, &state->lexer);
 		else
 			j = read_words(i, state->args, &state->lexer);
 		if (j < 0)
