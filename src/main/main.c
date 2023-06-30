@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 19:40:08 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 23:15:14 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	read_and_trim_input_addhistory(t_state *state)
 	return (1);
 }
 
-static int	minishell_loop(t_state *state)
+int	minishell_loop(t_state *state)
 {
 	if (!read_and_trim_input_addhistory(state))
 		return (0);

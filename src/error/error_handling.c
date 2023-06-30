@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:55 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 01:35:16 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	parser_error(int error, t_state *state, t_lexer *lexer)
 	ft_error(error, state);
 }
 
-int	parser_double_token_error(t_state *state, t_lexer *lexer,
-	t_ops op)
+int	parser_double_token_error(t_state *state, t_lexer *lexer, t_ops op)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 		STDERR_FILENO);

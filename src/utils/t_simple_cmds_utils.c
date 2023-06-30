@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 15:27:32 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 01:34:21 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_cmd_rm_first(t_cmd **lst)
 void	ft_cmd_clear(t_cmd **lst)
 {
 	t_cmd	*tmp;
-	t_lexer			*redirections_tmp;
+	t_lexer	*redirections_tmp;
 
 	if (!*lst)
 		return ;
