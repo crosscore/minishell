@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 19:39:20 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 22:01:26 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,13 +153,15 @@ t_lexer			*ft_lexernew(char *str, int op);
 void			ft_lexeradd_back(t_lexer **lst, t_lexer *new);
 void			ft_lexerdelone(t_lexer **lst, int i);
 void			ft_lexerclear(t_lexer **lst);
-int				token_reader(t_state *state);
 int				add_node(char *str, t_ops op, t_lexer **lexer);
 t_ops			check_op(int c);
 int				handle_op(char *str, int i, t_lexer **lexer);
 
 /* lexer */
 int				ft_lexer(t_state *state);
+int				is_delimiter(char c);
+int				skip_delimiter(char *str, int i);
+int				count_quotes(char *str);
 int				handle_quotes(int i, char *str, char del);
 
 /* executor */
