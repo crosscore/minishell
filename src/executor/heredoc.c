@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:17 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:38:41 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:57:46 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*generate_heredoc_filename(void)
 	return (file_name);
 }
 
-int	send_heredoc(t_state *state, t_simple_cmds *cmd)
+int	send_heredoc(t_state *state, t_cmd *cmd)
 {
 	t_lexer	*start;
 	int		sl;

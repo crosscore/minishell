@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:23 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:38:16 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:59:08 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*join_split_str(char **split_str, char *new_str);
 char	**resplit_str(char **double_arr);
 
-int	find_cmd(t_simple_cmds *cmd, t_state *state)
+int	find_cmd(t_cmd *cmd, t_state *state)
 {
 	int		i;
 	char	*mycmd;
@@ -35,7 +35,7 @@ int	find_cmd(t_simple_cmds *cmd, t_state *state)
 	return (cmd_not_found(cmd->str[0]));
 }
 
-void	handle_cmd(t_simple_cmds *cmd, t_state *state)
+void	handle_cmd(t_cmd *cmd, t_state *state)
 {
 	int	exit_code;
 
@@ -53,7 +53,7 @@ void	handle_cmd(t_simple_cmds *cmd, t_state *state)
 	exit(exit_code);
 }
 
-void	dup_cmd(t_simple_cmds *cmd, t_state *state, int end[2], int fd_in)
+void	dup_cmd(t_cmd *cmd, t_state *state, int end[2], int fd_in)
 {
 	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
 		ft_error(4, state);
@@ -66,12 +66,12 @@ void	dup_cmd(t_simple_cmds *cmd, t_state *state, int end[2], int fd_in)
 	handle_cmd(cmd, state);
 }
 
-void	single_cmd(t_simple_cmds *cmd, t_state *state)
+void	single_cmd(t_cmd *cmd, t_state *state)
 {
 	int	pid;
 	int	status;
 
-	state->simple_cmds = call_expander(state, state->simple_cmds);
+	state->cmd = call_expander(state, state->cmd);
 	if (cmd->builtin == cmd_cd || cmd->builtin == cmd_exit
 		|| cmd->builtin == cmd_export || cmd->builtin == cmd_unset)
 	{

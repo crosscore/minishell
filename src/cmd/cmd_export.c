@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:12:20 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:35:50 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:57:46 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	**add_var(char **arr, char *str)
 	return (rtn);
 }
 
-int	cmd_export(t_state *state, t_simple_cmds *simple_cmd)
+int	cmd_export(t_state *state, t_cmd *simple_cmd)
 {
 	char	**tmp;
 	int		i;

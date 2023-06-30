@@ -6,13 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:00:24 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_simple_cmds	*initialize_cmd(t_parser *parser)
+t_cmd	*initialize_cmd(t_parser *parser)
 {
 	char	**str;
 	int		i;
@@ -36,7 +36,7 @@ t_simple_cmds	*initialize_cmd(t_parser *parser)
 		}
 		arg_size--;
 	}
-	return (ft_simple_cmdsnew(str,
+	return (ft_cmd_new(str,
 			parser->num_redirections, parser->redirections));
 }
 
@@ -59,7 +59,7 @@ int	handle_pipe_errors(t_state *tools, t_ops op)
 // Helper Function 1:  Initialization
 int	initialize_tools(t_state *tools)
 {
-	tools->simple_cmds = NULL;
+	tools->cmd = NULL;
 	count_pipes(tools->lexer, tools);
 	if (tools->lexer->op == PIPELINE)
 		return (parser_double_token_error(tools, tools->lexer,
@@ -70,7 +70,7 @@ int	initialize_tools(t_state *tools)
 // Helper Function 2: Command Node Generation and Error Handling
 int	generate_cmd_nodes_and_handle_errors(t_state *state)
 {
-	t_simple_cmds	*node;
+	t_cmd	*node;
 	t_parser		parser;
 
 	while (state->lexer)
@@ -90,10 +90,10 @@ int	generate_cmd_nodes_and_handle_errors(t_state *state)
 			parser_error(0, state, parser.lexer);
 			return (EXIT_FAILURE);
 		}
-		if (!state->simple_cmds)
-			state->simple_cmds = node;
+		if (!state->cmd)
+			state->cmd = node;
 		else
-			ft_simple_cmdsadd_back(&state->simple_cmds, node);
+			ft_cmd_add_back(&state->cmd, node);
 		state->lexer = parser.lexer;
 	}
 	return (EXIT_SUCCESS);

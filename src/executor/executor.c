@@ -6,13 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:30 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:37:51 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:59:08 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_simple_cmds	*call_expander(t_state *state, t_simple_cmds *cmd)
+t_cmd	*call_expander(t_state *state, t_cmd *cmd)
 {
 	t_lexer	*start;
 
@@ -46,7 +46,7 @@ int	pipe_wait(int *pid, int amount)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_fork(t_state *state, int end[2], int fd_in, t_simple_cmds *cmd)
+int	ft_fork(t_state *state, int end[2], int fd_in, t_cmd *cmd)
 {
 	static int	i = 0;
 
@@ -64,7 +64,7 @@ int	ft_fork(t_state *state, int end[2], int fd_in, t_simple_cmds *cmd)
 	return (EXIT_SUCCESS);
 }
 
-int	check_fd_heredoc(t_state *state, int end[2], t_simple_cmds *cmd)
+int	check_fd_heredoc(t_state *state, int end[2], t_cmd *cmd)
 {
 	int	fd_in;
 
@@ -84,23 +84,23 @@ int	executor(t_state *state)
 	int		fd_in;
 
 	fd_in = STDIN_FILENO;
-	while (state->simple_cmds)
+	while (state->cmd)
 	{
-		state->simple_cmds = call_expander(state, state->simple_cmds);
-		if (state->simple_cmds->next)
+		state->cmd = call_expander(state, state->cmd);
+		if (state->cmd->next)
 			pipe(end);
-		send_heredoc(state, state->simple_cmds);
-		ft_fork(state, end, fd_in, state->simple_cmds);
+		send_heredoc(state, state->cmd);
+		ft_fork(state, end, fd_in, state->cmd);
 		close(end[1]);
-		if (state->simple_cmds->prev)
+		if (state->cmd->prev)
 			close(fd_in);
-		fd_in = check_fd_heredoc(state, end, state->simple_cmds);
-		if (state->simple_cmds->next)
-			state->simple_cmds = state->simple_cmds->next;
+		fd_in = check_fd_heredoc(state, end, state->cmd);
+		if (state->cmd->next)
+			state->cmd = state->cmd->next;
 		else
 			break ;
 	}
 	pipe_wait(state->pid, state->pipes);
-	state->simple_cmds = ft_simple_cmdsfirst(state->simple_cmds);
+	state->cmd = ft_cmd_first(state->cmd);
 	return (0);
 }

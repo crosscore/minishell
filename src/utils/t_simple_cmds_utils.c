@@ -6,18 +6,18 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:09:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:41:40 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:00:24 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_simple_cmds	*ft_simple_cmdsnew(char **str,
+t_cmd	*ft_cmd_new(char **str,
 	int num_redirections, t_lexer *redirections)
 {
-	t_simple_cmds	*new_element;
+	t_cmd	*new_element;
 
-	new_element = malloc(sizeof(t_simple_cmds));
+	new_element = malloc(sizeof(t_cmd));
 	if (!new_element)
 		return (0);
 	new_element->str = str;
@@ -30,9 +30,9 @@ t_simple_cmds	*ft_simple_cmdsnew(char **str,
 	return (new_element);
 }
 
-void	ft_simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new)
+void	ft_cmd_add_back(t_cmd **lst, t_cmd *new)
 {
-	t_simple_cmds	*tmp;
+	t_cmd	*tmp;
 
 	tmp = *lst;
 	if (*lst == NULL)
@@ -46,9 +46,9 @@ void	ft_simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new)
 	new->prev = tmp;
 }
 
-void	ft_simple_cmds_rm_first(t_simple_cmds **lst)
+void	ft_cmd_rm_first(t_cmd **lst)
 {
-	t_simple_cmds	*tmp;
+	t_cmd	*tmp;
 
 	if (!*lst)
 		return ;
@@ -58,9 +58,9 @@ void	ft_simple_cmds_rm_first(t_simple_cmds **lst)
 	*lst = tmp;
 }
 
-void	ft_simple_cmdsclear(t_simple_cmds **lst)
+void	ft_cmd_clear(t_cmd **lst)
 {
-	t_simple_cmds	*tmp;
+	t_cmd	*tmp;
 	t_lexer			*redirections_tmp;
 
 	if (!*lst)
@@ -80,7 +80,7 @@ void	ft_simple_cmdsclear(t_simple_cmds **lst)
 	*lst = NULL;
 }
 
-t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map)
+t_cmd	*ft_cmd_first(t_cmd *map)
 {
 	if (!map)
 		return (NULL);

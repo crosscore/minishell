@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:02:46 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:59:08 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_arrdup(char **arr)
 
 int	implement_tools(t_state *state)
 {
-	state->simple_cmds = NULL;
+	state->cmd = NULL;
 	state->lexer = NULL;
 	state->reset = false;
 	state->pid = NULL;

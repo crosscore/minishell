@@ -17,7 +17,7 @@ void	free_tools(t_state *state)
 	free_array(state->paths);
 	free_array(state->envp);
 	free(state->args);
-	ft_simple_cmdsclear(&state->simple_cmds);
+	ft_cmd_clear(&state->cmd);
 	free(state->pwd);
 	free(state->old_pwd);
 	if (state->pipes)
@@ -57,7 +57,7 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
-int	cmd_exit(t_state *state, t_simple_cmds *simple_cmd)
+int	cmd_exit(t_state *state, t_cmd *simple_cmd)
 {
 	char	**str;
 

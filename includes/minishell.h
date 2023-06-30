@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:50:05 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:00:24 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_state
 	char					*args;
 	char					**paths;
 	char					**envp;
-	struct s_simple_cmds	*simple_cmds;
+	struct s_cmd			*cmd;
 	t_lexer					*lexer;
 	char					*pwd;
 	char					*old_pwd;
@@ -93,16 +93,16 @@ typedef struct s_state
 	bool					reset;
 }	t_state;
 
-typedef struct s_simple_cmds
+typedef struct s_cmd
 {
 	char					**str;
-	int						(*builtin)(t_state *, struct s_simple_cmds *);
+	int						(*builtin)(t_state *, struct s_cmd *);
 	int						num_redirections;
 	char					*hd_file_name;
 	t_lexer					*redirections;
-	struct s_simple_cmds	*next;
-	struct s_simple_cmds	*prev;
-}	t_simple_cmds;
+	struct s_cmd			*next;
+	struct s_cmd			*prev;
+}	t_cmd;
 
 int				parse_envp(t_state *state);
 int				ft_parser(t_state *state);
@@ -114,9 +114,9 @@ int				count_args(t_lexer *lexer);
 t_lexer			*find_next_cmd(t_lexer *lexer_lst);
 
 //handle_redirections
-int				add_new_redirection(t_lexer *tmp, t_parser *parser_tools);
-int				handle_heredoc(t_parser *parser_tools, t_lexer *tmp);
-void			rm_redirections(t_parser *parser_tools);
+int				add_new_redirection(t_lexer *tmp, t_parser *parser);
+int				handle_heredoc(t_parser *parser, t_lexer *tmp);
+void			rm_redirections(t_parser *parser);
 int				reset_tools(t_state *state);
 void			init_stri(int i, int j, t_state *state);
 char			**expander(t_state *state, char **str);
@@ -125,7 +125,7 @@ size_t			dollar_sign(char *str);
 char			*char_to_str(char c);
 int				after_dol_lenght(char *str, int j);
 void			free_things(char *tmp2, t_state *state, int i);
-void			print_parser(t_simple_cmds simple_cmds);
+void			print_parser(t_cmd cmd);
 char			*delete_quotes_value(char *str);
 void			sigint_handler(int sig);
 void			sigquit_handler(int sig);
@@ -135,7 +135,7 @@ char			*delete_quotes_export(char *str, char c);
 int				question_mark(char **tmp);
 
 //builtins
-int		(*cmd_arr(char *str))(t_state *state, t_simple_cmds *simple_cmd);
+int				(*cmd_arr(char *str))(t_state *state, t_cmd *simple_cmd);
 
 // utils
 int				count_quotes(char *line);
@@ -144,12 +144,11 @@ char			**ft_arrdup(char **arr);
 int				minishell_loop(t_state *state);
 
 //t_simple_cmds_utils
-t_simple_cmds	*ft_simple_cmdsnew(char **str,
-					int num_redirections, t_lexer *redirections);
-void			ft_simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
-void			ft_simple_cmds_rm_first(t_simple_cmds **lst);
-void			ft_simple_cmdsclear(t_simple_cmds **lst);
-t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map);
+t_cmd			*ft_cmd_new(char **str, int num_redirections, t_lexer *redirections);
+void			ft_cmd_add_back(t_cmd **lst, t_cmd *new);
+void			ft_cmd_rm_first(t_cmd **lst);
+void			ft_cmd_clear(t_cmd **lst);
+t_cmd			*ft_cmd_first(t_cmd *map);
 
 //t_lexer_utils
 t_lexer			*ft_lexernew(char *str, int op);
@@ -165,20 +164,19 @@ int				handle_token(char *str, int i, t_lexer **lexer);
 int				handle_quotes(int i, char *str, char del);
 
 /* executor */
-int				check_redirections(t_simple_cmds *cmd);
+int				check_redirections(t_cmd *cmd);
 int				executor(t_state *state);
-t_simple_cmds	*call_expander(t_state *state, t_simple_cmds *cmd);
+t_cmd			*call_expander(t_state *state, t_cmd *cmd);
 int				pipe_wait(int *pid, int amount);
 
 // handle_cmd
-int				find_cmd(t_simple_cmds *cmd, t_state *state);
-void			handle_cmd(t_simple_cmds *cmd, t_state *state);
-void			dup_cmd(t_simple_cmds *cmd, t_state *state,
-					int end[2], int fd_in);
-void			single_cmd(t_simple_cmds *cmd, t_state *state);
+int				find_cmd(t_cmd *cmd, t_state *state);
+void			handle_cmd(t_cmd *cmd, t_state *state);
+void			dup_cmd(t_cmd *cmd, t_state *state, int end[2], int fd_in);
+void			single_cmd(t_cmd *cmd, t_state *state);
 
 // heredoc
-int				send_heredoc(t_state *state, t_simple_cmds *cmd);
+int				send_heredoc(t_state *state, t_cmd *cmd);
 
 /* initialization */
 int				parse_envp(t_state *state);
@@ -198,14 +196,14 @@ int				ft_error(int error, t_state *state);
 
 //cmd
 void			change_path(t_state *state);
-int				cmd_echo(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_cd(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_pwd(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_export(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_unset(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_env(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_exit(t_state *state, t_simple_cmds *simple_cmd);
-int				cmd_continue(t_state *state, t_simple_cmds *simple_cmd);
+int				cmd_echo(t_state *state, t_cmd *simple_cmd);
+int				cmd_cd(t_state *state, t_cmd *simple_cmd);
+int				cmd_pwd(t_state *state, t_cmd *simple_cmd);
+int				cmd_export(t_state *state, t_cmd *simple_cmd);
+int				cmd_unset(t_state *state, t_cmd *simple_cmd);
+int				cmd_env(t_state *state, t_cmd *simple_cmd);
+int				cmd_exit(t_state *state, t_cmd *simple_cmd);
+int				cmd_continue(t_state *state, t_cmd *simple_cmd);
 size_t			equal_sign(char *str);
 int				check_valid_identifier(char c);
 

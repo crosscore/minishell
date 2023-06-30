@@ -22,7 +22,7 @@ void	print_lines(int i, char **str, int out)
 	}
 }
 
-int	cmd_echo(t_state *tools, t_simple_cmds *simple_cmd)
+int	cmd_echo(t_state *tools, t_cmd *simple_cmd)
 {
 	int		i;
 	int		j;

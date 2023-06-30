@@ -53,7 +53,7 @@ char	**del_var(char **arr, char *str)
 	return (rtn);
 }
 
-int	unset_error(t_simple_cmds *simple_cmd)
+int	unset_error(t_cmd *simple_cmd)
 {
 	int		i;
 
@@ -82,7 +82,7 @@ int	unset_error(t_simple_cmds *simple_cmd)
 	return (EXIT_SUCCESS);
 }
 
-int	cmd_unset(t_state *state, t_simple_cmds *simple_cmd)
+int	cmd_unset(t_state *state, t_cmd *simple_cmd)
 {
 	char	**tmp;
 

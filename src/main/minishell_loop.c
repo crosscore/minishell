@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:32:15 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:59:08 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	reset_tools(t_state *state)
 {
-	ft_simple_cmdsclear(&state->simple_cmds);
+	ft_cmd_clear(&state->cmd);
 	free(state->args);
 	if (state->pid)
 		free(state->pid);
@@ -30,7 +30,7 @@ int	prepare_executor(t_state *state)
 	signal(SIGQUIT, sigquit_handler);
 	g_global.in_cmd = 1;
 	if (state->pipes == 0)
-		single_cmd(state->simple_cmds, state);
+		single_cmd(state->cmd, state);
 	else
 	{
 		state->pid = ft_calloc(sizeof(int), state->pipes + 2);

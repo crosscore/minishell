@@ -69,7 +69,7 @@ void	add_path_to_env(t_state *state)
 	}
 }
 
-int	cmd_cd(t_state *state, t_simple_cmds *simple_cmd)
+int	cmd_cd(t_state *state, t_cmd *simple_cmd)
 {
 	int		ret;
 
