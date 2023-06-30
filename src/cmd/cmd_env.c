@@ -12,11 +12,11 @@
 
 #include "../includes/minishell.h"
 
-int	cmd_env(t_state *state, t_cmd *simple_cmd)
+int	cmd_env(t_state *state, t_cmd *cmd)
 {
 	int		i;
 
-	(void) simple_cmd;
+	(void)cmd;
 	i = 0;
 	while (state->envp[i])
 	{

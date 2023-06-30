@@ -69,21 +69,21 @@ void	add_path_to_env(t_state *state)
 	}
 }
 
-int	cmd_cd(t_state *state, t_cmd *simple_cmd)
+int	cmd_cd(t_state *state, t_cmd *cmd)
 {
 	int		ret;
 
-	if (!simple_cmd->str[1])
+	if (!cmd->str[1])
 		ret = specific_path(state, "HOME=");
-	else if (ft_strncmp(simple_cmd->str[1], "-", 1) == 0)
+	else if (ft_strncmp(cmd->str[1], "-", 1) == 0)
 		ret = specific_path(state, "OLDPWD=");
 	else
 	{
-		ret = chdir(simple_cmd->str[1]);
+		ret = chdir(cmd->str[1]);
 		if (ret != 0)
 		{
 			ft_putstr_fd("minishell: ", STDERR_FILENO);
-			ft_putstr_fd(simple_cmd->str[1], STDERR_FILENO);
+			ft_putstr_fd(cmd->str[1], STDERR_FILENO);
 			perror(" ");
 		}
 	}

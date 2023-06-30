@@ -12,9 +12,9 @@
 
 #include "../includes/minishell.h"
 
-int	cmd_pwd(t_state *state, t_cmd *simple_cmd)
+int	cmd_pwd(t_state *state, t_cmd *cmd)
 {
-	(void) simple_cmd;
+	(void)cmd;
 	ft_putendl_fd(state->pwd, STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }

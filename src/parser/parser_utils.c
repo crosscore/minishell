@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:21 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:08:11 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	count_args(t_lexer *lexer)
 	return (i);
 }
 
-t_lexer	*find_next_cmd(t_lexer *lexer_lst)
+t_lexer	*find_next_cmd(t_lexer *lexer)
 {
-	while (lexer_lst && lexer_lst->op != PIPELINE)
-		lexer_lst = lexer_lst->next;
-	return (lexer_lst);
+	while (lexer && lexer->op != PIPELINE)
+		lexer = lexer->next;
+	return (lexer);
 }

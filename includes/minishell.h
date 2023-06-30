@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 14:00:24 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:03:05 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char			*delete_quotes_export(char *str, char c);
 int				question_mark(char **tmp);
 
 //builtins
-int				(*cmd_arr(char *str))(t_state *state, t_cmd *simple_cmd);
+int				(*cmd_arr(char *str))(t_state *state, t_cmd *cmd);
 
 // utils
 int				count_quotes(char *line);
@@ -196,14 +196,14 @@ int				ft_error(int error, t_state *state);
 
 //cmd
 void			change_path(t_state *state);
-int				cmd_echo(t_state *state, t_cmd *simple_cmd);
-int				cmd_cd(t_state *state, t_cmd *simple_cmd);
-int				cmd_pwd(t_state *state, t_cmd *simple_cmd);
-int				cmd_export(t_state *state, t_cmd *simple_cmd);
-int				cmd_unset(t_state *state, t_cmd *simple_cmd);
-int				cmd_env(t_state *state, t_cmd *simple_cmd);
-int				cmd_exit(t_state *state, t_cmd *simple_cmd);
-int				cmd_continue(t_state *state, t_cmd *simple_cmd);
+int				cmd_echo(t_state *state, t_cmd *cmd);
+int				cmd_cd(t_state *state, t_cmd *cmd);
+int				cmd_pwd(t_state *state, t_cmd *cmd);
+int				cmd_export(t_state *state, t_cmd *cmd);
+int				cmd_unset(t_state *state, t_cmd *cmd);
+int				cmd_env(t_state *state, t_cmd *cmd);
+int				cmd_exit(t_state *state, t_cmd *cmd);
+int				cmd_continue(t_state *state, t_cmd *cmd);
 size_t			equal_sign(char *str);
 int				check_valid_identifier(char c);
 

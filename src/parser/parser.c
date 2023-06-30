@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 14:00:24 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:06:47 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	initialize_tools(t_state *tools)
 // Helper Function 2: Command Node Generation and Error Handling
 int	generate_cmd_nodes_and_handle_errors(t_state *state)
 {
-	t_cmd	*node;
+	t_cmd			*node;
 	t_parser		parser;
 
 	while (state->lexer)

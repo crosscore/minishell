@@ -22,7 +22,7 @@ void	print_lines(int i, char **str, int out)
 	}
 }
 
-int	cmd_echo(t_state *tools, t_cmd *simple_cmd)
+int	cmd_echo(t_state *tools, t_cmd *cmd)
 {
 	int		i;
 	int		j;
@@ -31,19 +31,19 @@ int	cmd_echo(t_state *tools, t_cmd *simple_cmd)
 	i = 1;
 	n_option = false;
 	(void) tools;
-	while (simple_cmd->str[i] && simple_cmd->str[i][0] == '-'
-		&& simple_cmd->str[i][1] == 'n')
+	while (cmd->str[i] && cmd->str[i][0] == '-'
+		&& cmd->str[i][1] == 'n')
 	{
 		j = 1;
-		while (simple_cmd->str[i][j] == 'n')
+		while (cmd->str[i][j] == 'n')
 			j++;
-		if (simple_cmd->str[i][j] == '\0')
+		if (cmd->str[i][j] == '\0')
 			n_option = true;
 		else
 			break ;
 		i++;
 	}
-	print_lines(i, simple_cmd->str, STDOUT_FILENO);
+	print_lines(i, cmd->str, STDOUT_FILENO);
 	if (n_option == false)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (EXIT_SUCCESS);

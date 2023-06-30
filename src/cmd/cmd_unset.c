@@ -53,27 +53,27 @@ char	**del_var(char **arr, char *str)
 	return (rtn);
 }
 
-int	unset_error(t_cmd *simple_cmd)
+int	unset_error(t_cmd *cmd)
 {
 	int		i;
 
 	i = 0;
-	if (!simple_cmd->str[1])
+	if (!cmd->str[1])
 	{
 		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	while (simple_cmd->str[1][i])
+	while (cmd->str[1][i])
 	{
-		if (simple_cmd->str[1][i++] == '/')
+		if (cmd->str[1][i++] == '/')
 		{
 			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
-			ft_putstr_fd(simple_cmd->str[1], STDERR_FILENO);
+			ft_putstr_fd(cmd->str[1], STDERR_FILENO);
 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 			return (EXIT_FAILURE);
 		}
 	}
-	if (equal_sign(simple_cmd->str[1]) != 0)
+	if (equal_sign(cmd->str[1]) != 0)
 	{
 		ft_putendl_fd("minishell: unset: not a valid identifier",
 			STDERR_FILENO);
@@ -82,15 +82,15 @@ int	unset_error(t_cmd *simple_cmd)
 	return (EXIT_SUCCESS);
 }
 
-int	cmd_unset(t_state *state, t_cmd *simple_cmd)
+int	cmd_unset(t_state *state, t_cmd *cmd)
 {
 	char	**tmp;
 
-	if (unset_error(simple_cmd) == 1)
+	if (unset_error(cmd) == 1)
 		return (EXIT_FAILURE);
 	else
 	{
-		tmp = del_var(state->envp, simple_cmd->str[1]);
+		tmp = del_var(state->envp, cmd->str[1]);
 		free_array(state->envp);
 		state->envp = tmp;
 	}

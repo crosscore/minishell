@@ -57,17 +57,17 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
-int	cmd_exit(t_state *state, t_cmd *simple_cmd)
+int	cmd_exit(t_state *state, t_cmd *cmd)
 {
 	char	**str;
 
 	ft_putendl_fd("exit", STDERR_FILENO);
-	if (simple_cmd->str[1] && simple_cmd->str[2])
+	if (cmd->str[1] && cmd->str[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	str = ft_arrdup(simple_cmd->str);
+	str = ft_arrdup(cmd->str);
 	free_tools(state);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:12:20 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:57:46 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:04:12 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,24 +99,24 @@ char	**add_var(char **arr, char *str)
 	return (rtn);
 }
 
-int	cmd_export(t_state *state, t_cmd *simple_cmd)
+int	cmd_export(t_state *state, t_cmd *cmd)
 {
 	char	**tmp;
 	int		i;
 
 	i = 1;
-	if (!simple_cmd->str[1] || simple_cmd->str[1][0] == '\0')
-		cmd_env(state, simple_cmd);
+	if (!cmd->str[1] || cmd->str[1][0] == '\0')
+		cmd_env(state, cmd);
 	else
 	{
-		while (simple_cmd->str[i])
+		while (cmd->str[i])
 		{
-			if (check_parameter(simple_cmd->str[i]) == 0
-				&& variable_exist(state, simple_cmd->str[i]) == 0)
+			if (check_parameter(cmd->str[i]) == 0
+				&& variable_exist(state, cmd->str[i]) == 0)
 			{
-				if (simple_cmd->str[i])
+				if (cmd->str[i])
 				{
-					tmp = add_var(state->envp, simple_cmd->str[i]);
+					tmp = add_var(state->envp, cmd->str[i]);
 					free_array(state->envp);
 					state->envp = tmp;
 				}
