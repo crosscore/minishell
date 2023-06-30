@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 19:00:15 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 19:39:20 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ int				(*cmd_arr(char *str))(t_state *state, t_cmd *cmd);
 // utils
 int				implement_tools(t_state *state);
 char			**ft_arrdup(char **arr);
-int				minishell_loop(t_state *state);
 
 //t_simple_cmds_utils
 t_cmd			*ft_cmd_new(char **str, int num_ops, t_lexer *redirections);
