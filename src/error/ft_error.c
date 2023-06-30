@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:50 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:08:35 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:49:22 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_error(int error, t_state *tools)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error == 0)
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n",
+		ft_putstr_fd("parse error near `\\n'\n",
 			STDERR_FILENO);
 	else if (error == 1)
 		ft_putstr_fd("memory error: unable to assign memory\n", STDERR_FILENO);

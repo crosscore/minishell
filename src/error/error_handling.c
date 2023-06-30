@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:55 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 01:35:16 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:50:09 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ void	parser_error(int error, t_state *state, t_lexer *lexer)
 	ft_error(error, state);
 }
 
-int	parser_double_token_error(t_state *state, t_lexer *lexer, t_ops op)
+int	double_token_error(t_state *state, t_lexer *lexer, t_ops op)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token ",
+	ft_putstr_fd("minishell: parse error near ",
 		STDERR_FILENO);
 	if (op == REDIRECT_OUTPUT)
-		ft_putstr_fd("'>'\n", STDERR_FILENO);
+		ft_putstr_fd("`>'\n", STDERR_FILENO);
 	else if (op == APPEND_OUTPUT)
-		ft_putstr_fd("'>>'\n", STDERR_FILENO);
+		ft_putstr_fd("`>>'\n", STDERR_FILENO);
 	else if (op == REDIRECT_INPUT)
-		ft_putstr_fd("'<'\n", STDERR_FILENO);
+		ft_putstr_fd("`<'\n", STDERR_FILENO);
 	else if (op == HEREDOC)
-		ft_putstr_fd("'<<'\n", STDERR_FILENO);
+		ft_putstr_fd("`<<'\n", STDERR_FILENO);
 	else if (op == PIPELINE)
-		ft_putstr_fd("'|'\n", STDERR_FILENO);
+		ft_putstr_fd("`|'\n", STDERR_FILENO);
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
 	ft_lexerclear(&lexer);

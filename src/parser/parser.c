@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 22:05:01 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:37:49 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	handle_pipe_errors(t_state *tools, t_ops op)
 {
 	if (op == PIPELINE)
 	{
-		parser_double_token_error(tools, tools->lexer,
+		double_token_error(tools, tools->lexer,
 			tools->lexer->op);
 		return (EXIT_FAILURE);
 	}
@@ -61,8 +61,7 @@ int	initialize_tools(t_state *tools)
 	tools->cmd = NULL;
 	count_pipes(tools->lexer, tools);
 	if (tools->lexer->op == PIPELINE)
-		return (parser_double_token_error(tools, tools->lexer,
-				tools->lexer->op));
+		return (double_token_error(tools, tools->lexer, tools->lexer->op));
 	return (EXIT_SUCCESS);
 }
 

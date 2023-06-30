@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:28:43 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 02:37:49 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void		initialization(t_state *state, char **envp);
 
 /* error */
 void		parser_error(int error, t_state *state, t_lexer *lexer);
-int			parser_double_token_error(t_state *state, t_lexer *lexer, t_ops op);
+int			double_token_error(t_state *state, t_lexer *lexer, t_ops op);
 void		lexer_error(int error, t_state *state);
 int			cmd_not_found(char *str);
 int			export_error(char *c);
