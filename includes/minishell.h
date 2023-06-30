@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 14:03:05 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:17:15 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,34 +74,34 @@ typedef struct s_parser
 {
 	t_lexer			*lexer;
 	t_lexer			*redirections;
-	int				num_redirections;
+	int				num_ops;
 	struct s_state	*state;
 }	t_parser;
 
 typedef struct s_state
 {
-	char					*args;
-	char					**paths;
-	char					**envp;
-	struct s_cmd			*cmd;
-	t_lexer					*lexer;
-	char					*pwd;
-	char					*old_pwd;
-	int						pipes;
-	int						*pid;
-	bool					heredoc;
-	bool					reset;
+	char			*args;
+	char			**paths;
+	char			**envp;
+	struct s_cmd	*cmd;
+	t_lexer			*lexer;
+	char			*pwd;
+	char			*old_pwd;
+	int				pipes;
+	int				*pid;
+	bool			heredoc;
+	bool			reset;
 }	t_state;
 
 typedef struct s_cmd
 {
-	char					**str;
-	int						(*builtin)(t_state *, struct s_cmd *);
-	int						num_redirections;
-	char					*hd_file_name;
-	t_lexer					*redirections;
-	struct s_cmd			*next;
-	struct s_cmd			*prev;
+	char			**str;
+	int				(*builtin)(t_state *, struct s_cmd *);
+	int				num_ops;
+	char			*hd_file_name;
+	t_lexer			*redirections;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }	t_cmd;
 
 int				parse_envp(t_state *state);
@@ -144,7 +144,7 @@ char			**ft_arrdup(char **arr);
 int				minishell_loop(t_state *state);
 
 //t_simple_cmds_utils
-t_cmd			*ft_cmd_new(char **str, int num_redirections, t_lexer *redirections);
+t_cmd			*ft_cmd_new(char **str, int num_ops, t_lexer *redirections);
 void			ft_cmd_add_back(t_cmd **lst, t_cmd *new);
 void			ft_cmd_rm_first(t_cmd **lst);
 void			ft_cmd_clear(t_cmd **lst);

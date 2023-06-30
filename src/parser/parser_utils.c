@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:21 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 14:08:11 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:17:15 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_parser	init_parser(t_lexer *lexer, t_state *state)
 
 	parser.lexer = lexer;
 	parser.redirections = NULL;
-	parser.num_redirections = 0;
+	parser.num_ops = 0;
 	parser.state = state;
 	return (parser);
 }

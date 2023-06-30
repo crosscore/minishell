@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:42 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:57:46 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:57:39 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ int	check_append_outfile(t_lexer *redirections)
 	int	fd;
 
 	if (redirections->op == APPEND_OUTPUT)
-		fd = open(redirections->str,
-				O_CREAT | O_RDWR | O_APPEND, 0644);
+		fd = open(redirections->str, O_CREAT | O_RDWR | O_APPEND, 0644);
 	else
-		fd = open(redirections->str,
-				O_CREAT | O_RDWR | O_TRUNC, 0644);
+		fd = open(redirections->str, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	return (fd);
 }
 

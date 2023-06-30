@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:28 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:43:18 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:17:15 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	add_new_redirection(t_lexer *tmp, t_parser *parser)
 	index_2 = tmp->next->i;
 	ft_lexerdelone(&parser->lexer, index_1);
 	ft_lexerdelone(&parser->lexer, index_2);
-	parser->num_redirections++;
+	parser->num_ops++;
 	return (0);
 }
 
