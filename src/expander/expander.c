@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 20:02:59 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 23:34:34 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,40 @@ char	**expander(t_state *state, char **str)
 	int		i;
 	size_t	dollar_pos;
 	char	*tmp;
+	bool	is_single_quoted;
 
 	i = 0;
 	tmp = NULL;
 	while (str[i] != NULL)
 	{
-		dollar_pos = find_dollar_pos(str[i]);
-		if (dollar_pos >= 1 && str[i][dollar_pos - 1] != '\''
+		is_single_quoted = false;
+		// Check if the entire string is enclosed in single quotes
+		int len = strlen(str[i]);
+		if (str[i][0] == '\'' && str[i][len-1] == '\'')
+			is_single_quoted = true;
+		else if ((dollar_pos = find_dollar_pos(str[i])) >= 2 && str[i][dollar_pos - 2] == '\'')
+			is_single_quoted = true;
+
+		if (!is_single_quoted && dollar_pos >= 1 && str[i][dollar_pos - 1] != '\''
 			&& str[i][dollar_pos] != '\0')
 		{
 			tmp = detect_dollar_sign(state, str[i]);
 			free(str[i]);
 			str[i] = tmp;
 		}
-		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
+		else
 		{
-			str[i] = delete_quotes(str[i], '\"');
-			str[i] = delete_quotes(str[i], '\'');
+			// Memory re-allocation can be avoided if str[i] is not changed
+			if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
+			{
+				str[i] = delete_quotes(str[i], '\"');
+				str[i] = delete_quotes(str[i], '\'');
+			}
 		}
 		i++;
 	}
 	return (str);
 }
-
 
 char	*expander_str(t_state *state, char *str)
 {
