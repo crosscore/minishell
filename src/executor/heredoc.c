@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:17 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 14:09:49 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 18:47:43 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_heredoc(t_state *state, t_lexer *heredoc, char *file_name)
 	g_global.in_heredoc = 1;
 	sl = create_heredoc(heredoc, quotes, state, file_name);
 	g_global.in_heredoc = 0;
-	state->heredoc = true;
+	state->is_heredoc = true;
 	return (sl);
 }
 

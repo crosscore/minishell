@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:02:46 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:05:25 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 18:56:23 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	implement_tools(t_state *state)
 {
 	state->cmd = NULL;
 	state->lexer = NULL;
-	state->reset = false;
+	state->is_reset_completed = false;
 	state->pid = NULL;
-	state->heredoc = false;
+	state->is_heredoc = false;
 	g_global.stop_heredoc = 0;
 	g_global.in_cmd = 0;
 	g_global.in_heredoc = 0;

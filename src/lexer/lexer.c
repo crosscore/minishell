@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:55:33 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 18:02:29 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:12:41 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ static int	analyze_and_add_tokens(t_state *state)
 	int	j;
 	int	len;
 
-	len = ft_strlen(state->args);
+	len = ft_strlen(state->input_args);
 	i = 0;
 	while (i < len)
 	{
 		j = 0;
-		i += skip_delimiter(state->args, i);
-		if (check_op(state->args[i]))
-			j = handle_op(state->args, i, &state->lexer);
+		i += skip_delimiter(state->input_args, i);
+		if (check_op(state->input_args[i]))
+			j = handle_op(state->input_args, i, &state->lexer);
 		else
-			j = read_words(i, state->args, &state->lexer);
+			j = read_words(i, state->input_args, &state->lexer);
 		if (j < 0)
 			return (0);
 		i += j;
@@ -65,7 +65,7 @@ static int	analyze_and_add_tokens(t_state *state)
 
 int	ft_lexer(t_state *state)
 {
-	if (!count_quote_pairs(state->args))
+	if (!count_quote_pairs(state->input_args))
 		return (ft_error(2, state));
 	if (!analyze_and_add_tokens(state))
 		return (ft_error(1, state));

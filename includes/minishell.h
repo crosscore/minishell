@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 14:26:55 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:12:41 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ typedef struct s_parser
 
 typedef struct s_state
 {
-	char			*args;
+	char			*input_args;
 	char			**paths;
 	char			**envp;
 	char			*pwd;
 	char			*old_pwd;
-	int				pipes;
+	int				num_pipes;
 	int				*pid;
-	bool			heredoc;
-	bool			reset;
+	bool			is_heredoc;
+	bool			is_reset_completed;
 	t_lexer			*lexer;
 	struct s_cmd	*cmd;
 }	t_state;

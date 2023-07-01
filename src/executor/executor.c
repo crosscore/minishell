@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:30 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:59:08 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:09:23 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	ft_fork(t_state *state, int end[2], int fd_in, t_cmd *cmd)
 {
 	static int	i = 0;
 
-	if (state->reset == true)
+	if (state->is_reset_completed == true)
 	{
 		i = 0;
-		state->reset = false;
+		state->is_reset_completed = false;
 	}
 	state->pid[i] = fork();
 	if (state->pid[i] < 0)
@@ -68,7 +68,7 @@ int	check_fd_heredoc(t_state *state, int end[2], t_cmd *cmd)
 {
 	int	fd_in;
 
-	if (state->heredoc)
+	if (state->is_heredoc)
 	{
 		close(end[0]);
 		fd_in = open(cmd->hd_file_name, O_RDONLY);
@@ -100,7 +100,7 @@ int	executor(t_state *state)
 		else
 			break ;
 	}
-	pipe_wait(state->pid, state->pipes);
+	pipe_wait(state->pid, state->num_pipes);
 	state->cmd = ft_cmd_first(state->cmd);
 	return (0);
 }

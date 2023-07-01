@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 01:51:57 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:12:41 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static int	prepare_executor(t_state *state)
 {
 	signal(SIGQUIT, sigquit_handler);
 	g_global.in_cmd = 1;
-	if (state->pipes == 0)
+	if (state->num_pipes == 0)
 		single_cmd(state->cmd, state);
 	else
 	{
-		state->pid = ft_calloc(sizeof(int), state->pipes + 2);
+		state->pid = ft_calloc(sizeof(int), state->num_pipes + 2);
 		if (!state->pid)
 			return (ft_error(1, state));
 		executor(state);
@@ -33,30 +33,30 @@ static int	read_and_trim_input_addhistory(t_state *state)
 {
 	char	*tmp;
 
-	state->args = readline(READLINE_MSG);
-	tmp = ft_strtrim(state->args, " ");
-	free(state->args);
-	state->args = tmp;
-	if (!state->args)
+	state->input_args = readline(READLINE_MSG);
+	tmp = ft_strtrim(state->input_args, " ");
+	free(state->input_args);
+	state->input_args = tmp;
+	if (!state->input_args)
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
-	if (state->args[0] == '\0')
+	if (state->input_args[0] == '\0')
 		return (reset_tools(state));
-	add_history(state->args);
+	add_history(state->input_args);
 	return (1);
 }
 
 int	reset_tools(t_state *state)
 {
 	ft_cmd_clear(&state->cmd);
-	free(state->args);
+	free(state->input_args);
 	if (state->pid)
 		free(state->pid);
 	free_array(state->paths);
 	implement_tools(state);
-	state->reset = true;
+	state->is_reset_completed = true;
 	minishell_loop(state);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:21 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 22:05:01 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:09:23 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	count_pipes(t_lexer *lexer, t_state *state)
 	t_lexer	*tmp;
 
 	tmp = lexer;
-	state->pipes = 0;
+	state->num_pipes = 0;
 	while (tmp)
 	{
 		if (tmp->op == PIPELINE)
-			state->pipes++;
+			state->num_pipes++;
 		tmp = tmp->next;
 	}
 }

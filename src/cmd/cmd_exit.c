@@ -16,11 +16,11 @@ void	free_tools(t_state *state)
 {
 	free_array(state->paths);
 	free_array(state->envp);
-	free(state->args);
+	free(state->input_args);
 	ft_cmd_clear(&state->cmd);
 	free(state->pwd);
 	free(state->old_pwd);
-	if (state->pipes)
+	if (state->num_pipes)
 		free(state->pid);
 }
 
