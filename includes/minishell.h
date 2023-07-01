@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 19:16:26 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:18:02 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ typedef enum s_ops
 	HEREDOC,
 }	t_ops;
 
+typedef struct s_lexer
+{
+	char			*str;
+	t_ops			op;
+	int				i;
+	struct s_lexer	*next;
+	struct s_lexer	*prev;
+}	t_lexer;
+
 typedef struct s_state
 {
 	char			*input_args;
@@ -75,15 +84,6 @@ typedef struct s_state
 	t_lexer			*lexer;
 	struct s_cmd	*cmd;
 }	t_state;
-
-typedef struct s_lexer
-{
-	char			*str;
-	t_ops			op;
-	int				i;
-	struct s_lexer	*next;
-	struct s_lexer	*prev;
-}	t_lexer;
 
 typedef struct s_parser
 {
