@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:55:33 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 22:01:08 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 14:28:26 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	read_words(int i, char *str, t_lexer **lexer)
 	return (j);
 }
 
-static int	token_reader(t_state *state)
+static int	analyze_and_add_tokens(t_state *state)
 {
 	int		i;
 	int		j;
@@ -54,9 +54,9 @@ static int	token_reader(t_state *state)
 
 int	ft_lexer(t_state *state)
 {
-	if (!count_quotes(state->args))
+	if (!count_quote_pairs(state->args))
 		return (ft_error(2, state));
-	if (!token_reader(state))
+	if (!analyze_and_add_tokens(state))
 		return (ft_error(1, state));
 	return (1);
 }

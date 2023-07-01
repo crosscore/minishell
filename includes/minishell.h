@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:37:49 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 14:26:55 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int			handle_op(char *str, int i, t_lexer **lexer);
 int			ft_lexer(t_state *state);
 int			is_delimiter(char c);
 int			skip_delimiter(char *str, int i);
-int			count_quotes(char *str);
+int			count_quote_pairs(char *str);
 int			handle_quotes(int i, char *str, char del);
 
 /* executor */

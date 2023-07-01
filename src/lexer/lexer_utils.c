@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 22:11:12 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 14:26:55 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,22 @@ static int	find_matching_quote(char *str, int i, int *num_del, int del)
 	return (j - i);
 }
 
-int	count_quotes(char *str)
+int	count_quote_pairs(char *str)
 {
 	int	i;
 	int	s;
 	int	d;
 
+	i = 0;
 	s = 0;
 	d = 0;
-	i = -1;
-	while (str[++i])
+	while (str[i])
 	{
 		if (str[i] == '\"')
 			i += find_matching_quote(str, i, &d, '\"');
 		if (str[i] == '\'')
 			i += find_matching_quote(str, i, &s, '\'');
+		i++;
 	}
 	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
 		return (0);
