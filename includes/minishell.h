@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 19:19:41 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:58:28 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int			reset_tools(t_state *state);
 void		init_stri(int i, int j, t_state *state);
 char		**expander(t_state *state, char **str);
 char		*expander_str(t_state *state, char *str);
-size_t		dollar_sign(char *str);
+size_t		find_dollar_pos(char *str);
 char		*char_to_str(char c);
 int			after_dol_lenght(char *str, int j);
 void		free_things(char *tmp2, t_state *state, int i);

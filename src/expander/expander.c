@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/30 13:39:01 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:02:59 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ char	**expander(t_state *state, char **str)
 	tmp = NULL;
 	while (str[i] != NULL)
 	{
-		dollar_pos = dollar_sign(str[i]);
-		if (dollar_pos >= 2 && str[i][dollar_pos - 2] != '\''
+		dollar_pos = find_dollar_pos(str[i]);
+		if (dollar_pos >= 1 && str[i][dollar_pos - 1] != '\''
 			&& str[i][dollar_pos] != '\0')
 		{
 			tmp = detect_dollar_sign(state, str[i]);
@@ -119,8 +119,8 @@ char	*expander_str(t_state *state, char *str)
 	char	*tmp;
 
 	tmp = NULL;
-	if (dollar_sign(str) >= 2 && str[dollar_sign(str) - 2] != '\''
-		&& dollar_sign(str) != 0 && str[dollar_sign(str)] != '\0')
+	if (find_dollar_pos(str) >= 1 && str[find_dollar_pos(str) - 1] != '\''
+		&& find_dollar_pos(str) != 0 && str[find_dollar_pos(str)] != '\0')
 	{
 		tmp = detect_dollar_sign(state, str);
 		free(str);

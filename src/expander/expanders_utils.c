@@ -6,13 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:01 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/06/29 22:51:47 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:58:28 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-size_t	dollar_sign(char *str)
+size_t	find_dollar_pos(char *str)
 {
 	size_t	i;
 
