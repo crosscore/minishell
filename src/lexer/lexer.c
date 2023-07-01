@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:55:33 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 14:28:26 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 14:32:29 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	read_words(int i, char *str, t_lexer **lexer)
 	j = 0;
 	while (str[i + j] && !(check_op(str[i + j])))
 	{
-		j += handle_quotes(i + j, str, 34);
-		j += handle_quotes(i + j, str, 39);
+		j += handle_quotes(i + j, str, '\"');
+		j += handle_quotes(i + j, str, '\'');
 		if (is_delimiter(str[i + j]))
 			break ;
 		else

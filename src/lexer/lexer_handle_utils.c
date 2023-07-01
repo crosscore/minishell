@@ -29,12 +29,12 @@ int	handle_quotes(int i, char *str, char del)
 
 t_ops	check_op(int c)
 {
+	int			i;
 	static int	op_arr[3][2] = {
 	{'|', PIPELINE},
 	{'>', REDIRECT_OUTPUT},
 	{'<', REDIRECT_INPUT},
 	};
-	int			i;
 
 	i = 0;
 	while (i < 3)
