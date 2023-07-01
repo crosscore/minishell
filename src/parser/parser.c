@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 18:29:41 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:53:04 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_cmd	*initialize_cmd(t_parser *parser)
 	return (ft_cmd_new(str, parser->num_ops, parser->redirections));
 }
 
-int	handle_pipe_errors(t_state *tools, t_ops op)
+int	handle_pipe_errors(t_state *tools, t_operators op)
 {
 	if (op == PIPELINE)
 	{

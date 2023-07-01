@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 19:58:28 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:54:46 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ t_global	g_global;
 /*  APPEND_OUTPUT: >>  */
 /*  REDIRECT_INPUT: <  */
 /*  HEREDOC: <<  */
-typedef enum s_ops
+typedef enum s_operators
 {
 	PIPELINE = 1,
 	REDIRECT_OUTPUT,
 	APPEND_OUTPUT,
 	REDIRECT_INPUT,
 	HEREDOC,
-}	t_ops;
+}	t_operators;
 
 typedef struct s_lexer
 {
 	char			*str;
-	t_ops			op;
 	int				i;
+	t_operators		op;
 	struct s_lexer	*next;
 	struct s_lexer	*prev;
 }	t_lexer;
@@ -151,8 +151,8 @@ t_lexer		*ft_lexernew(char *str, int op);
 void		ft_lexeradd_back(t_lexer **lst, t_lexer *new);
 void		ft_lexerdelone(t_lexer **lst, int i);
 void		ft_lexerclear(t_lexer **lst);
-int			add_node(char *str, t_ops op, t_lexer **lexer);
-t_ops		check_op(int c);
+int			add_node(char *str, t_operators op, t_lexer **lexer);
+t_operators	check_op(int c);
 int			handle_op(char *str, int i, t_lexer **lexer);
 
 /* lexer */
@@ -186,7 +186,7 @@ void		initialization(t_state *state, char **envp);
 
 /* error */
 void		parser_error(int error, t_state *state, t_lexer *lexer);
-int			double_token_error(t_state *state, t_lexer *lexer, t_ops op);
+int			double_token_error(t_state *state, t_lexer *lexer, t_operators op);
 void		lexer_error(int error, t_state *state);
 int			cmd_not_found(char *str);
 int			export_error(char *c);

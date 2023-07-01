@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 15:25:52 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:53:04 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	skip_delimiter(char *str, int i)
 	return (j);
 }
 
-int	add_node(char *str, t_ops op, t_lexer **lexer)
+int	add_node(char *str, t_operators op, t_lexer **lexer)
 {
 	t_lexer	*node;
 

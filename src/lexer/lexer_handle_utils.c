@@ -30,7 +30,7 @@ int	handle_quotes(int i, char *str, char del)
 	return (j);
 }
 
-t_ops	check_op(int c)
+t_operators	check_op(int c)
 {
 	int			i;
 	static int	op_arr[3][2] = {
@@ -51,7 +51,7 @@ t_ops	check_op(int c)
 
 int	handle_op(char *str, int i, t_lexer **lexer)
 {
-	t_ops	op;
+	t_operators	op;
 
 	op = check_op(str[i]);
 	if (op == REDIRECT_OUTPUT && check_op(str[i + 1]) == REDIRECT_OUTPUT)

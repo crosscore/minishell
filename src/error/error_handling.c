@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:55 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:50:09 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:53:04 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parser_error(int error, t_state *state, t_lexer *lexer)
 	ft_error(error, state);
 }
 
-int	double_token_error(t_state *state, t_lexer *lexer, t_ops op)
+int	double_token_error(t_state *state, t_lexer *lexer, t_operators op)
 {
 	ft_putstr_fd("minishell: parse error near ",
 		STDERR_FILENO);
