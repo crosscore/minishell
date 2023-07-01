@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:07 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 23:34:34 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/02 01:31:30 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	*detect_dollar_sign(t_state *state, char *str)
 char	**expander(t_state *state, char **str)
 {
 	int		i;
+	int		len;
 	size_t	dollar_pos;
 	char	*tmp;
 	bool	is_single_quoted;
@@ -98,27 +99,23 @@ char	**expander(t_state *state, char **str)
 	{
 		is_single_quoted = false;
 		// Check if the entire string is enclosed in single quotes
-		int len = strlen(str[i]);
-		if (str[i][0] == '\'' && str[i][len-1] == '\'')
+		len = strlen(str[i]);
+		if (str[i][0] == '\'' && str[i][len - 1] == '\'')
 			is_single_quoted = true;
-		else if ((dollar_pos = find_dollar_pos(str[i])) >= 2 && str[i][dollar_pos - 2] == '\'')
+		dollar_pos = find_dollar_pos(str[i]);
+		if (dollar_pos >= 2 && str[i][dollar_pos - 2] == '\'')
 			is_single_quoted = true;
-
-		if (!is_single_quoted && dollar_pos >= 1 && str[i][dollar_pos - 1] != '\''
-			&& str[i][dollar_pos] != '\0')
+		if (dollar_pos >= 1 && str[i][dollar_pos - 1] != '\''
+			&& str[i][dollar_pos] != '\0' && !is_single_quoted)
 		{
 			tmp = detect_dollar_sign(state, str[i]);
 			free(str[i]);
 			str[i] = tmp;
 		}
-		else
+		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
-			// Memory re-allocation can be avoided if str[i] is not changed
-			if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
-			{
-				str[i] = delete_quotes(str[i], '\"');
-				str[i] = delete_quotes(str[i], '\'');
-			}
+			str[i] = delete_quotes(str[i], '\"');
+			str[i] = delete_quotes(str[i], '\'');
 		}
 		i++;
 	}
