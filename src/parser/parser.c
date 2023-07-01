@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:30:53 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:37:49 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 18:29:41 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	handle_pipe_errors(t_state *tools, t_ops op)
 {
 	if (op == PIPELINE)
 	{
-		double_token_error(tools, tools->lexer,
-			tools->lexer->op);
+		double_token_error(tools, tools->lexer, tools->lexer->op);
 		return (EXIT_FAILURE);
 	}
 	if (!tools->lexer)
@@ -68,30 +67,29 @@ int	initialize_tools(t_state *tools)
 // Helper Function 2: Command Node Generation and Error Handling
 int	generate_cmd_nodes_and_handle_errors(t_state *state)
 {
-	t_cmd			*node;
+	t_cmd			*cmd_node;
 	t_parser		parser;
 
 	while (state->lexer)
 	{
 		if (state->lexer && state->lexer->op == PIPELINE)
 			ft_lexerdelone(&state->lexer, state->lexer->i);
-		if (!state->lexer || \
-			handle_pipe_errors(state, state->lexer->op))
+		if (!state->lexer || handle_pipe_errors(state, state->lexer->op))
 		{
 			parser_error(0, state, state->lexer);
 			return (EXIT_FAILURE);
 		}
 		parser = initialize_parser(state->lexer, state);
-		node = initialize_cmd(&parser);
-		if (!node)
+		cmd_node = initialize_cmd(&parser);
+		if (!cmd_node)
 		{
 			parser_error(0, state, parser.lexer);
 			return (EXIT_FAILURE);
 		}
 		if (!state->cmd)
-			state->cmd = node;
+			state->cmd = cmd_node;
 		else
-			ft_cmd_add_back(&state->cmd, node);
+			ft_cmd_add_back(&state->cmd, cmd_node);
 		state->lexer = parser.lexer;
 	}
 	return (EXIT_SUCCESS);
