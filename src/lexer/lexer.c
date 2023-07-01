@@ -6,21 +6,30 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:55:33 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 14:32:29 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 18:02:29 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	read_words(int i, char *str, t_lexer **lexer)
+int	read_words(int i, char *str, t_lexer **lexer)
 {
 	int	j;
+	int	ret;
+	int	len;
 
+	len = ft_strlen(str);
 	j = 0;
-	while (str[i + j] && !(check_op(str[i + j])))
+	while ((i + j) < len && str[i + j] && !(check_op(str[i + j])))
 	{
-		j += handle_quotes(i + j, str, '\"');
-		j += handle_quotes(i + j, str, '\'');
+		ret = handle_quotes(i + j, str, '\"');
+		if (ret < 0)
+			return (-1);
+		j += ret;
+		ret = handle_quotes(i + j, str, '\'');
+		if (ret < 0)
+			return (-1);
+		j += ret;
 		if (is_delimiter(str[i + j]))
 			break ;
 		else
@@ -33,11 +42,13 @@ static int	read_words(int i, char *str, t_lexer **lexer)
 
 static int	analyze_and_add_tokens(t_state *state)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
+	int	len;
 
+	len = ft_strlen(state->args);
 	i = 0;
-	while (state->args[i])
+	while (i < len)
 	{
 		j = 0;
 		i += skip_delimiter(state->args, i);

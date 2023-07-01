@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:10:34 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 14:26:55 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 15:25:52 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,24 @@ static int	find_matching_quote(char *str, int i, int *num_del, int del)
 int	count_quote_pairs(char *str)
 {
 	int	i;
-	int	s;
-	int	d;
+	int	single_count;
+	int	double_count;
+	int	len;
 
 	i = 0;
-	s = 0;
-	d = 0;
-	while (str[i])
+	single_count = 0;
+	double_count = 0;
+	len = ft_strlen(str);
+	while (i < len)
 	{
 		if (str[i] == '\"')
-			i += find_matching_quote(str, i, &d, '\"');
+			i += find_matching_quote(str, i, &double_count, '\"');
 		if (str[i] == '\'')
-			i += find_matching_quote(str, i, &s, '\'');
+			i += find_matching_quote(str, i, &single_count, '\'');
 		i++;
 	}
-	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
+	if ((double_count > 0 && double_count % 2 != 0) || \
+		(single_count > 0 && single_count % 2 != 0))
 		return (0);
 	return (1);
 }
