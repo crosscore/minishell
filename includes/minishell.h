@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 19:18:02 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:19:41 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define MAGENTA 		"\033[35m"
 # define CYAN    		"\033[36m"
 # define WHITE   		"\033[37m"
-# define GREY    		"\033[90m"
 # define HEREDOC_MSG	"\033[1;34mheredoc> \033[0m"
 # define READLINE_MSG	"\033[1;36mminishell\033[34m$ \033[0m"
 
