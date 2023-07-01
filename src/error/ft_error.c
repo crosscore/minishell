@@ -6,21 +6,13 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:50 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 02:49:22 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/01 18:24:29 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * @brief
- * Finds corresponding error and frees args;
- * @param error
- * Number of related error:
- * 0 = If there is no string following a redirection or a pipe.
- * @param tools
- */
-int	ft_error(int error, t_state *tools)
+int	ft_error(int error, t_state *state)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error == 0)
@@ -43,6 +35,6 @@ int	ft_error(int error, t_state *tools)
 		ft_putstr_fd("infile: No such file or directory\n", STDERR_FILENO);
 	else if (error == 8)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
-	reset_tools(tools);
+	reset_tools(state);
 	return (EXIT_FAILURE);
 }
