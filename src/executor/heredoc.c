@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:17 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 18:47:43 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:57:33 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	send_heredoc(t_state *state, t_cmd *cmd)
 			if (sl)
 			{
 				g_global.error_num = 1;
-				return (reset_tools(state));
+				return (ft_reset(state));
 			}
 		}
 		cmd->redirections = cmd->redirections->next;

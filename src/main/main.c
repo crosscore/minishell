@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:59:06 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 19:12:41 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:57:33 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static int	read_and_trim_input_addhistory(t_state *state)
 		exit(EXIT_SUCCESS);
 	}
 	if (state->input_args[0] == '\0')
-		return (reset_tools(state));
+		return (ft_reset(state));
 	add_history(state->input_args);
 	return (1);
 }
 
-int	reset_tools(t_state *state)
+int	ft_reset(t_state *state)
 {
 	ft_cmd_clear(&state->cmd);
 	free(state->input_args);
@@ -69,7 +69,7 @@ int	minishell_loop(t_state *state)
 		return (0);
 	ft_parser(state);
 	prepare_executor(state);
-	reset_tools(state);
+	ft_reset(state);
 	return (1);
 }
 

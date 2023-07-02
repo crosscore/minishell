@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:50 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 18:24:29 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:57:33 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	ft_error(int error, t_state *state)
 		ft_putstr_fd("infile: No such file or directory\n", STDERR_FILENO);
 	else if (error == 8)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
-	reset_tools(state);
+	ft_reset(state);
 	return (EXIT_FAILURE);
 }

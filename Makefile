@@ -6,14 +6,13 @@
 #    By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/26 18:50:32 by ysakahar          #+#    #+#              #
-#    Updated: 2023/06/28 02:58:42 by ysakahar         ###   ########.fr        #
+#    Updated: 2023/07/02 15:01:00 by ysakahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 CC			= cc
 MKDIR		= mkdir -p
-
 LIBFTP		= libft
 SRC_DIR		= src
 BUILD_DIR	= $(SRC_DIR)/build
@@ -22,12 +21,10 @@ LIB_DIR		= ./libft
 
 READLINE_DIR = $(shell brew --prefix readline)
 READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib
-INCLUDES = -Iincludes -I$(LIBFTP) -I$(READLINE_DIR)/include
+INCLUDES 	= -Iincludes -I$(LIBFTP) -I$(READLINE_DIR)/include
 
 SRCS		= $(shell find $(SRC_DIR) -name "*.c")
 OBJS		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
-#$(info $(SRCS))
-
 FLAGS		= -Wall -Werror -Wextra -g -fsanitize=address
 LIBFT		= $(LIB_DIR)/libft.a
 HEADER		= includes/minishell.h

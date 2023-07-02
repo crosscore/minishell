@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:27:37 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 20:54:46 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:57:33 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_lexer		*find_next_cmd(t_lexer *lexer_lst);
 int			add_new_redirection(t_lexer *tmp, t_parser *parser);
 int			handle_heredoc(t_parser *parser, t_lexer *tmp);
 void		rm_redirections(t_parser *parser);
-int			reset_tools(t_state *state);
+int			ft_reset(t_state *state);
 void		init_stri(int i, int j, t_state *state);
 char		**expander(t_state *state, char **str);
 char		*expander_str(t_state *state, char *str);

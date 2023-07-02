@@ -6,7 +6,7 @@
 /*   By: ysakahar <ysakahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:11:55 by ysakahar          #+#    #+#             */
-/*   Updated: 2023/07/01 20:53:04 by ysakahar         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:57:33 by ysakahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	double_token_error(t_state *state, t_lexer *lexer, t_operators op)
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
 	ft_lexerclear(&lexer);
-	reset_tools(state);
+	ft_reset(state);
 	return (EXIT_FAILURE);
 }
 
